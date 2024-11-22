@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
-import "./globals.css"
+import "./ui/globals.css"
 import Header from "./ui/Header"
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "./ui/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 })
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "./ui/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 })
@@ -22,9 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body
@@ -32,7 +30,7 @@ export default function RootLayout({
       >
         <div className="flex h-full flex-col font-[family-name:var(--font-geist-sans)]">
           <Header />
-          <main className="flex-1 overflow-auto">{children}</main>
+          <main className="flex-1">{children}</main>
         </div>
       </body>
     </html>
