@@ -7,7 +7,7 @@ export default function Home() {
       <main className="flex flex-col items-center gap-4">
         <h1 className="text-3xl font-bold">Welcome to MyNotes!</h1>
         <Link href="/notes" className="flex items-center gap-2 font-medium">
-          <span>Go to my notes</span>
+          <span className="text-sm/6">Go to my notes</span>
           <ArrowRightIcon className="size-5" />
         </Link>
       </main>
