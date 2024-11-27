@@ -8,7 +8,7 @@ export default function NotesLayout({
       <div className="md:w-64">
         <SideNav />
       </div>
-      <div className="flex-1 p-4 md:overflow-auto md:p-8">{children}</div>
+      <main className="flex-1 p-4 md:overflow-auto md:p-8">{children}</main>
     </div>
   )
 }

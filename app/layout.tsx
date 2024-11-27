@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         <div className="flex h-full flex-col font-[family-name:var(--font-geist-sans)]">
           <Header />
-          <main className="flex-1">{children}</main>
+          <div className="flex-1">{children}</div>
         </div>
       </body>
     </html>
