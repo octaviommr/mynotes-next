@@ -6,7 +6,7 @@ export default function Header() {
       <Link href="/" className="text-2xl font-bold">
         MyNotes
       </Link>
-      <span className="flex-1"></span>
+      <span className="flex-1" />
     </header>
   )
 }

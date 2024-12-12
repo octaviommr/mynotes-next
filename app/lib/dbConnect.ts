@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 declare global {
   // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
-  var mongoose: any // This must be a `var` and not a `let / const`
+  var mongoose: any // this must be a "var" and not a "let" or "const"
 }
 
 let cached = global.mongoose
@@ -11,7 +11,7 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null }
 }
 
-async function connect() {
+async function dbConnect() {
   const MONGODB_URI = process.env.MONGODB_URI!
 
   if (!MONGODB_URI) {
@@ -33,12 +33,12 @@ async function connect() {
   }
   try {
     cached.conn = await cached.promise
-  } catch (e) {
+  } catch (error) {
     cached.promise = null
-    throw e
+    throw error
   }
 
   return cached.conn
 }
 
-export default connect
+export default dbConnect

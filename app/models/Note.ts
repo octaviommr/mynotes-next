@@ -41,10 +41,7 @@ export const makeNote = ({
 const noteSchema = new mongoose.Schema<INote>({
   title: { type: String, required: [true, "Title is required."] },
   content: { type: String },
-  important: {
-    type: Boolean,
-    required: [true, "Importance status is required."],
-  },
+  important: { type: Boolean },
 })
 
 export default mongoose.models.Note || mongoose.model<INote>("Note", noteSchema)
