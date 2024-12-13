@@ -3,8 +3,9 @@
 import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
 import { TrashIcon } from "@heroicons/react/20/solid"
-import { NoteActionState, deleteNote } from "@/app/lib/actions"
+import { NoteActionState, deleteNote, revalidateNotes } from "@/app/lib/actions"
 import { Note } from "@/app/models/Note"
+import { useMessage } from "../messages/MessageContext"
 
 export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
   const [actionState, formAction] = useActionState<NoteActionState>(
@@ -12,16 +13,40 @@ export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
     {},
   )
   /*
-    NOTE: We're using a bound function for the action that already includes an initial parameter containing the note ID
-    value. This is because actions are only called with the state and payload parameters.
+    NOTE: We're using a bound function for the server action that already includes an initial parameter containing the
+    note ID value. This is because actions are only called with the state and payload parameters.
   */
 
+  const messageContext = useMessage()
+
+  // display success and error messages
   useEffect(() => {
-    if (actionState.error) {
-      // TODO: trigger toast notification with error message
-      console.log("Delete error: " + actionState.error)
+    if (!messageContext) {
+      return
     }
-  }, [actionState.error])
+
+    if (actionState.isSuccess) {
+      messageContext.showMessage({
+        severity: "success",
+        content: "Note deleted successfully!",
+      })
+
+      /* 
+        Call a server action to revalidate the path for the note board page. This will trigger a new server request and
+        update the page, reflecting the deleted note.
+      */
+      revalidateNotes()
+      return
+    }
+
+    if (actionState.error) {
+      messageContext.showMessage({
+        severity: "error",
+        content: actionState.error,
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actionState.isSuccess, actionState.error])
 
   return (
     <form action={formAction}>

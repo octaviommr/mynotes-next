@@ -5,10 +5,10 @@ A very simple note board application, written for sandboxing and demonstration p
 ## Front-end
 
 - TypeScript code for static type checking
-- State management using Redux Toolkit
+- State management using Context API
 - Tailwind CSS styling (with Headless UI and Heroicons)
-- Accessibility using ARIA roles and attributes and ensuring color contrast
-- Global error handling
+- Accessibility using ARIA roles and attributes, and ensuring color contrast
+- Error handling
 
 ## Back-end
 

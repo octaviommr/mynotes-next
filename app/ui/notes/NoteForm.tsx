@@ -8,6 +8,7 @@ import { Note } from "@/app/models/Note"
 import TextField from "../form/TextField"
 import TextareaField from "../form/TextareaField"
 import CheckboxField from "../form/CheckboxField"
+import { useMessage } from "../messages/MessageContext"
 
 export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
   const [actionState, formAction] = useActionState<NoteActionState, FormData>(
@@ -15,14 +16,19 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
     {},
   )
   /*
-    NOTE: For the update action, we're using a bound function that already includes an initial parameter containing the
-    note ID value. This is because actions are only called with the state and payload parameters.
+    NOTE: For the update server action, we're using a bound function that already includes an initial parameter containing
+    the note ID value. This is because actions are only called with the state and payload parameters.
   */
 
+  const messageContext = useMessage()
+
+  // display error messages
   useEffect(() => {
-    if (actionState.error) {
-      // TODO: trigger toast notification with error message
-      console.log(`${note ? "Update" : "Create"} error: ${actionState.error}`)
+    if (actionState.error && messageContext) {
+      messageContext.showMessage({
+        severity: "error",
+        content: actionState.error,
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actionState.error])

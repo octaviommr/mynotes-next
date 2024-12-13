@@ -7,6 +7,7 @@ import dbConnect from "./dbConnect"
 import NoteModel from "../models/Note"
 
 export interface ActionState<T> {
+  isSuccess?: boolean
   validationErrors?: T
   error?: string
 }
@@ -24,8 +25,8 @@ const makeNoteValidationErrors = (
 }
 
 /* 
-    Server actions called via the "action" attribute when a form is submitted (behind the scenes, these create "POST" API
-    endpoints) 
+  Server actions called by client-side components directly or via the "action" attribute when a form is submitted (behind
+  the scenes, these create "POST" API endpoints).
 */
 export async function createNote(
   prevState: NoteActionState,
@@ -51,12 +52,12 @@ export async function createNote(
   }
 
   /* 
-    Clear client-side cache for the note board route to make sure a new request to the server is made the next time the
-    page is visited (since we have new data)
+    Clear cached data (server-side and client-side) for the note board page path. This will trigger a new server request
+    and update the page when it's next visited.
   */
   revalidatePath("/notes")
 
-  // serve a redirect back to the note board
+  // serve a redirect back to the note board page
   redirect("/notes")
 }
 
@@ -70,14 +71,7 @@ export async function updateNote(
   try {
     await dbConnect()
 
-    const updatedNote = await NoteModel.findOneAndReplace(
-      { _id: id },
-      flatFormData,
-    )
-
-    if (!updatedNote) {
-      // TODO: handle note not found
-    }
+    await NoteModel.findOneAndReplace({ _id: id }, flatFormData)
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return makeNoteValidationErrors(error)
@@ -92,27 +86,20 @@ export async function updateNote(
   }
 
   /* 
-    Clear client-side cache for the note board route to make sure a new request to the server is made the next time the
-    page is visited (since we have updated data)
+    Clear cached data (server-side and client-side) for the note board page path. This will trigger a new server request
+    and update the page when it's next visited.
   */
   revalidatePath("/notes")
 
-  // serve a redirect back to the note board
+  // serve a redirect back to the note board page
   redirect("/notes")
 }
 
 export async function deleteNote(id: string): Promise<NoteActionState> {
-  // DEBUG
-  console.log("Deleting note with id: ", id)
-
   try {
     await dbConnect()
 
-    const deletedNote = await NoteModel.findByIdAndDelete(id)
-
-    if (!deletedNote) {
-      // TODO: handle note not found
-    }
+    await NoteModel.findByIdAndDelete(id)
   } catch (error) {
     // log the error
     console.error(error)
@@ -122,12 +109,24 @@ export async function deleteNote(id: string): Promise<NoteActionState> {
     }
   }
 
+  // action was successful!
+  return { isSuccess: true }
+}
+/*
+  NOTE: As an example, we're showing a message after a successful delete action. For that, we can't run the revalidation
+  of the note board page path directly in the action, since that would refresh the page before we could process the return
+  object and trigger the success message. In this situation, we call the "revalidateNotes" server action below directly
+  from the client-side component AFTER showing the message.
+
+  If we wanted to do the same for the create and update actions, we could keep the revalidate call in the action (since
+  those actions are not called from within the note board page) but we'd need to remove the redirect call and perform
+  the redirection in the client-side component using the "useRouter" hook.
+*/
+
+export async function revalidateNotes() {
   /* 
-    Clear client-side cache for the note board route, in which this action is called. This will trigger a new server
-    request and update the page, reflecting the deleted data.
+    Clear cached data (server-side and client-side) for the note board page path. This will trigger a new server request
+    and update the page when this action is called from within it, or when the page is next visited.
   */
   revalidatePath("/notes")
-
-  // action was successful!
-  return {}
 }
