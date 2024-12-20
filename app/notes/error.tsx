@@ -21,7 +21,7 @@ export default function Error({
       <p>Something went wrong.</p>
       <Button
         type="button"
-        className="rounded-md border border-solid border-black/[.08] px-3 py-1.5 text-sm/6 font-semibold dark:border-white/[.145]"
+        className="rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold"
         onClick={
           // attempt to recover by trying to re-render the route segment where the error ocurred
           () => reset()

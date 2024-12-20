@@ -55,9 +55,8 @@ const TextareaField = ({
         rows={rows}
         defaultValue={defaultValue}
         className={clsx(
-          "mt-1 block w-full resize-none rounded-lg border border-solid bg-[var(--background)] px-3 py-1.5 text-sm/6 data-[disabled]:border-opacity-50 data-[disabled]:bg-[#f2f2f2] dark:data-[disabled]:bg-[#1a1a1a]",
+          "mt-1 block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]",
           {
-            "border-black/[.08] dark:border-white/[.145]": !error,
             "border-red-500 dark:border-red-500": !!error,
           },
         )}

@@ -63,7 +63,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
         </Link>
         <Button
           type="submit"
-          className="rounded-md border border-solid border-black/[.08] bg-[#f2f2f2] px-3 py-1.5 text-sm/6 font-semibold dark:border-white/[.145] dark:bg-[#1a1a1a]"
+          className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
         >
           {note ? "Update" : "Create"}
         </Button>

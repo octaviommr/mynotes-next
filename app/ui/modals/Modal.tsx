@@ -20,9 +20,9 @@ export default function Modal() {
           className="relative z-50"
           role={modal.type === "alert" ? "alertdialog" : "dialog"}
         >
-          <DialogBackdrop className="fixed inset-0 bg-[#f2f2f2] dark:bg-[#1a1a1a]" />
+          <DialogBackdrop className="fixed inset-0 bg-[var(--secondary-background)]" />
           <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-            <DialogPanel className="max-w-lg space-y-4 bg-[var(--background)] p-12">
+            <DialogPanel className="max-w-lg space-y-4 bg-[var(--main-background)] p-12">
               <DialogTitle className="text-2xl font-bold">
                 {modal.title}
               </DialogTitle>
@@ -31,7 +31,7 @@ export default function Modal() {
                 {modal.type === "alert" && (
                   <Button
                     type="button"
-                    className="rounded-md border border-solid border-black/[.08] px-3 py-1.5 text-sm/6 font-semibold dark:border-white/[.145]"
+                    className="rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold"
                     onClick={() => closeModal(false)}
                   >
                     {modal.cancelLabel}
@@ -39,7 +39,7 @@ export default function Modal() {
                 )}
                 <Button
                   type="button"
-                  className="rounded-md border border-solid border-black/[.08] bg-[#f2f2f2] px-3 py-1.5 text-sm/6 font-semibold dark:border-white/[.145] dark:bg-[#1a1a1a]"
+                  className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
                   onClick={() => closeModal(true)}
                 >
                   {modal.okLabel}
