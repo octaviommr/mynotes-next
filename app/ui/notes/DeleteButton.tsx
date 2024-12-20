@@ -1,62 +1,76 @@
 "use client"
 
-import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
 import { TrashIcon } from "@heroicons/react/20/solid"
-import { NoteActionState, deleteNote, revalidateNotes } from "@/app/lib/actions"
+import {
+  deleteNote as runDeleteNoteAction,
+  revalidateNotes,
+} from "@/app/lib/actions"
 import { Note } from "@/app/models/Note"
-import { useMessage } from "../messages/MessageContext"
+import { useMessageDispatch } from "../messages/MessageContext"
+import { useModalControl } from "../modals/ModalContext"
 
 export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
-  const [actionState, formAction] = useActionState<NoteActionState>(
-    deleteNote.bind(null, note.id),
-    {},
-  )
-  /*
-    NOTE: We're using a bound function for the server action that already includes an initial parameter containing the
-    note ID value. This is because actions are only called with the state and payload parameters.
-  */
+  const dispatchMessage = useMessageDispatch()
+  const { showModal } = useModalControl()
 
-  const messageContext = useMessage()
+  const deleteNote = async () => {
+    const confirmationModalResult = await showModal({
+      type: "alert",
+      title: "Delete Note",
+      content: "Are you sure you want to delete the note?",
+      okLabel: "Delete",
+      cancelLabel: "Cancel",
+    })
 
-  // display success and error messages
-  useEffect(() => {
-    if (!messageContext) {
+    if (!confirmationModalResult) {
       return
     }
 
-    if (actionState.isSuccess) {
-      messageContext.showMessage({
+    const actionResult = await runDeleteNoteAction(note.id)
+
+    if (actionResult.error) {
+      dispatchMessage({
+        type: "open",
+        message: {
+          severity: "error",
+          content: actionResult.error,
+        },
+      })
+
+      return
+    }
+
+    // show a success message
+    dispatchMessage({
+      type: "open",
+      message: {
         severity: "success",
         content: "Note deleted successfully!",
-      })
+      },
+    })
 
-      /* 
-        Call a server action to revalidate the path for the note board page. This will trigger a new server request and
-        update the page, reflecting the deleted note.
-      */
-      revalidateNotes()
-      return
-    }
-
-    if (actionState.error) {
-      messageContext.showMessage({
-        severity: "error",
-        content: actionState.error,
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [actionState.isSuccess, actionState.error])
+    /* 
+      Call a server action to revalidate the path for the note board page. This will trigger a new server request and
+      update the page, reflecting the deleted note.
+    */
+    revalidateNotes()
+  }
 
   return (
-    <form action={formAction}>
-      <Button
-        type="submit"
-        aria-label="Delete"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <TrashIcon className="size-5 fill-red-500" />
-      </Button>
-    </form>
+    <Button
+      aria-label="Delete"
+      onClick={(event) => {
+        /*
+          Make sure we prevent the default action of this click event, which would be navigating to the note detail
+          page (since this button is within the "a" element)
+        */
+        event.preventDefault()
+
+        deleteNote()
+      }}
+    >
+      <TrashIcon className="size-5 fill-red-500" />
+    </Button>
   )
 }

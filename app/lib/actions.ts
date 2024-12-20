@@ -7,7 +7,6 @@ import dbConnect from "./dbConnect"
 import NoteModel from "../models/Note"
 
 export interface ActionState<T> {
-  isSuccess?: boolean
   validationErrors?: T
   error?: string
 }
@@ -110,7 +109,7 @@ export async function deleteNote(id: string): Promise<NoteActionState> {
   }
 
   // action was successful!
-  return { isSuccess: true }
+  return {}
 }
 /*
   NOTE: As an example, we're showing a message after a successful delete action. For that, we can't run the revalidation

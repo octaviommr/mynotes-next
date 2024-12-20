@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import "./ui/globals.css"
 import Header from "./ui/Header"
 import MessageProvider from "./ui/messages/MessageContext"
+import ModalProvider from "./ui/modals/ModalContext"
 
 const geistSans = localFont({
   src: "./ui/fonts/GeistVF.woff",
@@ -30,10 +31,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <MessageProvider>
-          <div className="flex h-full flex-col font-[family-name:var(--font-geist-sans)]">
-            <Header />
-            <div className="flex-1">{children}</div>
-          </div>
+          <ModalProvider>
+            <div className="flex h-full flex-col font-[family-name:var(--font-geist-sans)]">
+              <Header />
+              <div className="flex-1">{children}</div>
+            </div>
+          </ModalProvider>
         </MessageProvider>
       </body>
     </html>

@@ -1,62 +1,62 @@
 "use client"
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react"
-import Alert, { MessageSeverity } from "./Alert"
+import { createContext, Dispatch, Reducer, useContext, useReducer } from "react"
+import Message from "./Message"
+import { MessageSeverity } from "./Alert"
 
-export interface Message {
+interface MessageType {
   severity: MessageSeverity
   content: string
 }
 
-export interface MessageContextType {
-  showMessage: (message: Message) => void
-}
+type MessageState =
+  | { open: false; message?: MessageType }
+  | { open: true; message: MessageType }
 
-const MessageContext = createContext<MessageContextType | null>(null)
+type MessageAction = { type: "open"; message: MessageType } | { type: "close" }
+
+const MessageContext = createContext<MessageState | null>(null)
+const MessageDispatchContext = createContext<Dispatch<MessageAction> | null>(
+  null,
+)
+
+function messageReducer(
+  state: MessageState,
+  action: MessageAction,
+): MessageState {
+  switch (action.type) {
+    case "open":
+      return { open: true, message: action.message }
+
+    case "close":
+      return { open: false }
+  }
+}
 
 export default function MessageProvider({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
-
-  const showMessage = useCallback((message: Message) => {
-    setMessage(message)
-    setOpen(true)
-
-    // auto dismiss after 6 seconds
-    setTimeout(() => setOpen(false), 6000)
-  }, [])
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const value = useMemo(() => ({ showMessage }), [])
-  /*    
-    NOTE: We should always use a memoized object for the context value to make sure it doesn't change (by creating a new
-    object) when the component is re-rendered and there's no change in the context value. And, to make sure there's no
-    undesired changes in the context value, we should always use memoized functions.
-
-    React re-renders children that are subscribed to the context whenever the context value changes. The above ensures
-    there's no unnecessary re-renders, which can harm performance.
-  */
+  const [state, dispatch] = useReducer<Reducer<MessageState, MessageAction>>(
+    messageReducer,
+    { open: false },
+  )
 
   return (
     <>
-      <MessageContext.Provider value={value}>
-        {children}
+      <MessageContext.Provider value={state}>
+        <MessageDispatchContext.Provider value={dispatch}>
+          {children}
+          <Message />
+        </MessageDispatchContext.Provider>
       </MessageContext.Provider>
-      <div className="fixed bottom-8 left-8 w-full">
-        {open && (
-          <Alert severity={message!.severity} message={message!.content} />
-        )}
-      </div>
     </>
   )
+  /*
+    NOTE: Providing the state and dispatcher contexts separately ensures that components that only need to subscribe to one
+    of them only get re-rendered if that context value is updated.
+  */
 }
 
-export const useMessage = () => useContext(MessageContext)
+export const useMessage = () => useContext(MessageContext) as MessageState
+export const useMessageDispatch = () =>
+  useContext(MessageDispatchContext) as Dispatch<MessageAction>

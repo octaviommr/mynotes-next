@@ -8,7 +8,7 @@ import { Note } from "@/app/models/Note"
 import TextField from "../form/TextField"
 import TextareaField from "../form/TextareaField"
 import CheckboxField from "../form/CheckboxField"
-import { useMessage } from "../messages/MessageContext"
+import { useMessageDispatch } from "../messages/MessageContext"
 
 export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
   const [actionState, formAction] = useActionState<NoteActionState, FormData>(
@@ -20,14 +20,17 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
     the note ID value. This is because actions are only called with the state and payload parameters.
   */
 
-  const messageContext = useMessage()
+  const dispatchMessage = useMessageDispatch()
 
   // display error messages
   useEffect(() => {
-    if (actionState.error && messageContext) {
-      messageContext.showMessage({
-        severity: "error",
-        content: actionState.error,
+    if (actionState.error) {
+      dispatchMessage({
+        type: "open",
+        message: {
+          severity: "error",
+          content: actionState.error,
+        },
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +63,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
         </Link>
         <Button
           type="submit"
-          className="rounded-md border border-solid border-black/[.08] px-3 py-1.5 text-sm/6 font-semibold dark:border-white/[.145]"
+          className="rounded-md border border-solid border-black/[.08] bg-[#f2f2f2] px-3 py-1.5 text-sm/6 font-semibold dark:border-white/[.145] dark:bg-[#1a1a1a]"
         >
           {note ? "Update" : "Create"}
         </Button>
