@@ -16,7 +16,7 @@ interface AlertProps {
 export default function Alert({ severity, message }: Readonly<AlertProps>) {
   return (
     <div
-      className="flex max-w-lg items-center gap-2 rounded-md border border-solid border-[var(--border)] p-4"
+      className="flex max-w-lg items-center gap-2 rounded-md border border-solid border-[var(--border)] bg-[var(--main-background)] p-4"
       role="alert"
     >
       {severity === "error" && <XCircleIcon className="size-6 fill-red-500" />}
