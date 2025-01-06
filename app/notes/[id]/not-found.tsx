@@ -6,7 +6,7 @@ export default async function NotFoundNote() {
       <h2 className="text-2xl font-bold">Ooops...</h2>
       <p>Note not found.</p>
       <Link href="/notes" className="text-sm/6 font-medium">
-        Go Back
+        Go to Note Board
       </Link>
     </div>
   )

@@ -6,7 +6,7 @@ export default function Home() {
     <main className="flex h-full flex-col items-center justify-center gap-4">
       <h1 className="text-3xl font-bold">Welcome to MyNotes!</h1>
       <Link href="/notes" className="flex items-center gap-2">
-        <span className="text-sm/6 font-medium">See My Notes</span>
+        <span className="text-sm/6 font-medium">Go to Note Board</span>
         <ArrowRightIcon className="size-5" />
       </Link>
     </main>

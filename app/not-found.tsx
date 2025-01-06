@@ -6,7 +6,7 @@ export default async function NotFound() {
       <h2 className="text-2xl font-bold">Ooops...</h2>
       <p>Page not found.</p>
       <Link href="/" className="text-sm/6 font-medium">
-        Go Back
+        Go to Homepage
       </Link>
     </div>
   )

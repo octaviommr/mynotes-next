@@ -2,8 +2,14 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { HomeIcon, PlusIcon } from "@heroicons/react/24/outline"
+import { Button } from "@headlessui/react"
+import {
+  HomeIcon,
+  PlusIcon,
+  ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/react/24/outline"
 import clsx from "clsx"
+import { logOut } from "@/app/lib/actions"
 
 export default function SideNav() {
   const path = usePathname()
@@ -35,6 +41,14 @@ export default function SideNav() {
         <span className="font-medium">Add Note</span>
       </Link>
       <span className="flex-1" />
+      <Button
+        type="button"
+        className="flex items-center justify-center gap-2 rounded-md p-3 hover:bg-[var(--secondary-background)] md:justify-start md:p-2 md:px-3"
+        onClick={() => logOut()}
+      >
+        <ArrowLeftStartOnRectangleIcon className="size-6" />
+        <span className="font-medium">Log Out</span>
+      </Button>
     </nav>
   )
 }

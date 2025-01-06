@@ -3,7 +3,12 @@
 import Link from "next/link"
 import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
-import { NoteActionState, createNote, updateNote } from "@/app/lib/actions"
+import {
+  FormActionState,
+  NoteValidationErrors,
+  createNote,
+  updateNote,
+} from "@/app/lib/actions"
 import { Note } from "@/app/models/Note"
 import TextField from "../form/TextField"
 import TextareaField from "../form/TextareaField"
@@ -11,10 +16,10 @@ import CheckboxField from "../form/CheckboxField"
 import { useMessageDispatch } from "../messages/MessageContext"
 
 export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
-  const [actionState, formAction] = useActionState<NoteActionState, FormData>(
-    note ? updateNote.bind(null, note.id) : createNote,
-    {},
-  )
+  const [actionState, formAction, isPending] = useActionState<
+    FormActionState<NoteValidationErrors>,
+    FormData
+  >(note ? updateNote.bind(null, note.id) : createNote, {})
   /*
     NOTE: For the update server action, we're using a bound function that already includes an initial parameter containing
     the note ID value. This is because actions are only called with the state and payload parameters.
@@ -34,7 +39,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [actionState.error])
+  }, [actionState])
 
   return (
     <form action={formAction} aria-labelledby="page-title">
@@ -64,6 +69,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
         <Button
           type="submit"
           className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
+          disabled={isPending}
         >
           {note ? "Update" : "Create"}
         </Button>

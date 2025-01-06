@@ -17,7 +17,7 @@ const TextField = ({
   error,
   disabled,
 }: Readonly<TextFieldProps>) => {
-  // set up refs to use the input as uncontrolled, thus avoiding rerenders when value changes
+  // set up refs to use the input as uncontrolled, thus avoiding re-renders when value changes
   const inputRef = useRef<HTMLInputElement>(null)
   const valueRef = useRef<string>()
 

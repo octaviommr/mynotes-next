@@ -105,6 +105,10 @@ export default function ModalProvider({
       </ModalContext.Provider>
     </>
   )
+  /*
+    NOTE: Providing the state and control contexts separately ensures that components that only need to subscribe to one
+    of them only get re-rendered if that context value is updated.
+  */
 }
 
 export const useModal = () => useContext(ModalContext) as ModalState
