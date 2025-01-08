@@ -1,5 +1,10 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import SignUpForm from "../ui/auth/SignUpForm"
+
+export const metadata: Metadata = {
+  title: "Sign Up",
+}
 
 export default function SignUp() {
   return (

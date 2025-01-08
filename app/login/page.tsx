@@ -1,5 +1,10 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import LogInForm from "../ui/auth/LogInForm"
+
+export const metadata: Metadata = {
+  title: "Log In",
+}
 
 export default function LogIn() {
   return (

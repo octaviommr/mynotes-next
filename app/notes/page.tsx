@@ -1,6 +1,11 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { getNotes } from "../lib/data"
 import NoteBoardItem from "../ui/notes/NoteBoardItem"
+
+export const metadata: Metadata = {
+  title: "Note Board",
+}
 
 export default async function NoteBoard() {
   const notes = await getNotes()

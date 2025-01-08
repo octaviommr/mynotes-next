@@ -1,4 +1,9 @@
+import type { Metadata } from "next"
 import NoteForm from "@/app/ui/notes/NoteForm"
+
+export const metadata: Metadata = {
+  title: "New Note",
+}
 
 export default function NewNote() {
   return (

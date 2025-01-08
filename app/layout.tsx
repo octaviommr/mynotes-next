@@ -17,7 +17,10 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "MyNotes",
+  title: {
+    template: "%s | MyNotes",
+    default: "MyNotes",
+  },
   description:
     "A very simple note board application showcasing the Next.js framework, written for sandboxing and demonstration purposes.",
 }
