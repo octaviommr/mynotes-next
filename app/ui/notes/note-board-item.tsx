@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Note } from "@/app/models/Note"
-import DeleteButton from "./DeleteButton"
+import DeleteButton from "./delete-button"
 
 export default function NoteBoardItem({ note }: Readonly<{ note: Note }>) {
   return (

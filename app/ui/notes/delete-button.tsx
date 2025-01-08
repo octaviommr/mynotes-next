@@ -7,8 +7,8 @@ import {
   revalidateNotes,
 } from "@/app/lib/actions"
 import { Note } from "@/app/models/Note"
-import { useMessageDispatch } from "../messages/MessageContext"
-import { useModalControl } from "../modals/ModalContext"
+import { useMessageDispatch } from "../messages/message-context"
+import { useModalControl } from "../modals/modal-context"
 
 export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
   const dispatchMessage = useMessageDispatch()

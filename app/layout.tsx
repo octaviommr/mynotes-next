@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./ui/globals.css"
-import Header from "./ui/Header"
-import MessageProvider from "./ui/messages/MessageContext"
-import ModalProvider from "./ui/modals/ModalContext"
+import Header from "./ui/header"
+import MessageProvider from "./ui/messages/message-context"
+import ModalProvider from "./ui/modals/modal-context"
 
 const geistSans = localFont({
   src: "./ui/fonts/GeistVF.woff",

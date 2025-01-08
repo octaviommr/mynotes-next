@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { getNotes } from "../lib/data"
-import NoteBoardItem from "../ui/notes/NoteBoardItem"
+import NoteBoardItem from "../ui/notes/note-board-item"
 
 export const metadata: Metadata = {
   title: "Note Board",

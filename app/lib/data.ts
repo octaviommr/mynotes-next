@@ -1,4 +1,4 @@
-import dbConnect from "./dbConnect"
+import dbConnect from "./db-connect"
 import NoteModel, { Note, makeNote } from "@/app/models/Note"
 import { auth } from "@/auth"
 

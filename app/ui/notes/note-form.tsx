@@ -10,10 +10,10 @@ import {
   updateNote,
 } from "@/app/lib/actions"
 import { Note } from "@/app/models/Note"
-import TextField from "../form/TextField"
-import TextareaField from "../form/TextareaField"
-import CheckboxField from "../form/CheckboxField"
-import { useMessageDispatch } from "../messages/MessageContext"
+import TextField from "../form/text-field"
+import TextareaField from "../form/textarea-field"
+import CheckboxField from "../form/checkbox-field"
+import { useMessageDispatch } from "../messages/message-context"
 
 export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
   const [actionState, formAction, isPending] = useActionState<

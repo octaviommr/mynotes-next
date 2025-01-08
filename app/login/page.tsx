@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import LogInForm from "../ui/auth/LogInForm"
+import LogInForm from "../ui/auth/log-in-form"
 
 export const metadata: Metadata = {
   title: "Log In",

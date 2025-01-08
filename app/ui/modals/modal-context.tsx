@@ -8,7 +8,7 @@ import {
   useCallback,
   useMemo,
 } from "react"
-import Modal from "./Modal"
+import Modal from "./modal"
 
 // set up a discriminated union to represent the available modal types
 type ModalType =

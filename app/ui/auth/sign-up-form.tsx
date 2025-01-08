@@ -2,19 +2,20 @@
 
 import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
-import { LogInActionState, logIn } from "@/app/lib/actions"
-import TextField from "../form/TextField"
-import PasswordField from "../form/PasswordField"
-import { useMessageDispatch } from "../messages/MessageContext"
-import { useSearchParams } from "next/navigation"
+import {
+  FormActionState,
+  SignUpValidationErrors,
+  signUp,
+} from "@/app/lib/actions"
+import TextField from "../form/text-field"
+import PasswordField from "../form/password-field"
+import { useMessageDispatch } from "../messages/message-context"
 
-export default function LogInForm() {
-  const searchParams = useSearchParams()
-
+export default function SignUpForm() {
   const [actionState, formAction, isPending] = useActionState<
-    LogInActionState,
+    FormActionState<SignUpValidationErrors>,
     FormData
-  >(logIn, { callbackUrl: searchParams.get("callbackUrl") ?? undefined })
+  >(signUp, {})
 
   const dispatchMessage = useMessageDispatch()
 
@@ -40,17 +41,27 @@ export default function LogInForm() {
           label="Email"
           error={actionState.validationErrors?.email}
         />
+        <TextField
+          name="name"
+          label="Name"
+          error={actionState.validationErrors?.name}
+        />
         <PasswordField
           name="password"
           label="Password"
           error={actionState.validationErrors?.password}
+        />
+        <PasswordField
+          name="confirmationPassword"
+          label="Confirm Password"
+          error={actionState.validationErrors?.confirmationPassword}
         />
         <Button
           type="submit"
           className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
           disabled={isPending}
         >
-          Log In
+          Sign Up
         </Button>
       </div>
     </form>
