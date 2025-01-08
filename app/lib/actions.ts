@@ -351,7 +351,7 @@ export async function signUp(
       Handle MongoDB duplicate key errors, since we're using the "unique" option in the schema (this option is NOT a
       validator and won't cause a mongoose validation error)
     */
-    if (error instanceof mongoose.mongo.MongoError && error.code === "11000") {
+    if (error instanceof mongoose.mongo.MongoError && error.code === 11000) {
       return {
         error: `${email} is already in use.`,
       }
