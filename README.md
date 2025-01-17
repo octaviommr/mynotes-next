@@ -24,15 +24,24 @@ Below is a breakdown of the most relevant application features:
 - Authentication and authorization using the "next-auth" package of Auth.js and Next.js middleware
 - Graceful error handling
 
-## Building locally
+## Running locally
 
 ### Prerequisites
 
 Building and running the application locally requires Node.js 20+ and MongoDB Community Edition 6+ to be installed in your system.
 
+### Install dependencies
+
+Run `npm install` to install all the needed packages for the project.
+
+### Environment variables
+
+Create a ".env.local" file containing the following key and value representing the MongoDB database running locally:
+
+`MONGODB_URI=mongodb://127.0.0.1:27017/your-database-name-goes-here`
+
+Run `npx auth secret` to generate a secret key that will be used to encrypt Auth.js cookies. This will also add it to the ".env.local" file.
+
 ### Build and start
 
-Run the following commands to build and start the application:
-
-- "npm install" (to install the needed packages)
-- "npm run dev" (to start the development server)
+Run `npm run dev` to build the application and start the development server. The application can be accessed via http://localhost:3000.
