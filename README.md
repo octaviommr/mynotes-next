@@ -28,7 +28,7 @@ Below is a breakdown of the most relevant application features:
 
 ### Prerequisites
 
-Building and running the application locally requires Node.js 20+ and MongoDB Community Edition 6+ to be installed in your system.
+Building and running the application locally requires Node.js 20+ and either MongoDB Community Edition 6+ or a MongoDB Atlas account.
 
 ### Install dependencies
 
@@ -36,9 +36,11 @@ Run `npm install` to install all the needed packages for the project.
 
 ### Environment variables
 
-Create a ".env.local" file containing the following key and value representing the MongoDB database running locally:
+Create a ".env.local" file containing the following key and value representing the address of the MongoDB instance:
 
-`MONGODB_URI=mongodb://127.0.0.1:27017/your-database-name-goes-here`
+`MONGODB_URI=your-mongodb-instance-address-goes-here`
+
+Typically, a local MongoDB instance address looks like `mongodb://127.0.0.1:27017/your-database-name-goes-here`. If you're using MongoDB Atlas, use the connection string that is provided for your instance.
 
 Run `npx auth secret` to generate a secret key that will be used to encrypt Auth.js cookies. This will also add it to the ".env.local" file.
 
