@@ -8,17 +8,17 @@ export const metadata: Metadata = {
 
 export default function LogIn() {
   return (
-    <main className="flex h-full flex-col justify-center gap-10">
-      <h2 className="text-center text-2xl font-bold">Log In</h2>
+    <div className="flex h-full flex-col justify-center gap-10">
+      <h1 className="text-center text-3xl font-bold">Log In</h1>
       <div className="mx-auto w-full max-w-sm">
         <LogInForm />
       </div>
-      <div className="flex flex-col items-center">
+      <footer className="flex items-center justify-center gap-2">
         <p>Don&apos;t have an account yet?</p>
         <Link href="/signup" className="text-sm/6 font-medium">
           Sign Up
         </Link>
-      </div>
-    </main>
+      </footer>
+    </div>
   )
 }

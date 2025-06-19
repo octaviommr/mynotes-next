@@ -1,18 +1,14 @@
-import { Checkbox, Field, Label } from "@headlessui/react"
+import { Checkbox, Field, Label, type CheckboxProps } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/16/solid"
 
-interface CheckboxFieldProps {
-  name: string
+type CheckboxFieldProps = Omit<CheckboxProps, "className" | "value"> & {
   label: string
-  defaultChecked?: boolean
-  disabled?: boolean
 }
 
 const CheckboxField = ({
-  name,
-  label,
-  defaultChecked,
   disabled,
+  label,
+  ...props
 }: Readonly<CheckboxFieldProps>) => {
   return (
     <Field className="flex items-center gap-2" disabled={disabled}>
@@ -20,10 +16,9 @@ const CheckboxField = ({
         {label}
       </Label>
       <Checkbox
-        name={name}
-        defaultChecked={defaultChecked}
-        value="true"
         className="group size-6 rounded-md p-1 ring-1 ring-inset ring-black/[.08] hover:cursor-default dark:ring-white/[.145]"
+        value="true"
+        {...props}
       >
         <CheckIcon className="hidden size-4 group-data-[checked]:block" />
       </Checkbox>

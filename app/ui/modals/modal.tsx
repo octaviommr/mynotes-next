@@ -30,7 +30,6 @@ export default function Modal() {
               <div className="flex justify-end gap-4">
                 {modal.type === "alert" && (
                   <Button
-                    type="button"
                     className="rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold"
                     onClick={() => closeModal(false)}
                   >
@@ -38,7 +37,6 @@ export default function Modal() {
                   </Button>
                 )}
                 <Button
-                  type="button"
                   className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
                   onClick={() => closeModal(true)}
                 >

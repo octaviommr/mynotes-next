@@ -43,12 +43,13 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
 
   return (
     <form action={formAction} aria-labelledby="page-title">
-      <div className="flex flex-col gap-6">
+      <section className="flex flex-col gap-6">
         <TextField
           name="title"
-          label="Title (required)"
+          label="Title"
           defaultValue={note?.title}
           error={actionState.validationErrors?.title}
+          required
         />
         <TextareaField
           name="content"
@@ -61,8 +62,8 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
           label="Important"
           defaultChecked={note?.important}
         />
-      </div>
-      <div className="mt-6 flex items-center justify-end gap-4">
+      </section>
+      <section className="mt-8 flex items-center justify-end gap-4">
         <Link href="/notes" className="text-sm/6 font-medium">
           Cancel
         </Link>
@@ -73,7 +74,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
         >
           {note ? "Update" : "Create"}
         </Button>
-      </div>
+      </section>
     </form>
   )
 }

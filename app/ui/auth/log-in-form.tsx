@@ -34,17 +34,28 @@ export default function LogInForm() {
 
   return (
     <form action={formAction}>
-      <div className="flex flex-col gap-6">
+      <section className="flex flex-col gap-6">
         <TextField
           name="email"
           label="Email"
           error={actionState.validationErrors?.email}
         />
+        {/* 
+          NOTE: No need to mark this field as required, since it's already obvious for users that the email field is
+          required when logging in
+        */}
+
         <PasswordField
           name="password"
           label="Password"
           error={actionState.validationErrors?.password}
         />
+        {/*
+          NOTE: For security reasons, we want to give potential attackers as few hints as possible about the password.
+          Therefore, we won't mark the field as required.
+        */}
+      </section>
+      <section className="mt-8 flex flex-col">
         <Button
           type="submit"
           className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
@@ -52,7 +63,7 @@ export default function LogInForm() {
         >
           Log In
         </Button>
-      </div>
+      </section>
     </form>
   )
 }

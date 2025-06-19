@@ -1,21 +1,26 @@
 import { ChangeEventHandler, useEffect, useRef } from "react"
-import { Input, Field, Label, Description } from "@headlessui/react"
-import clsx from "clsx"
+import { Input, Field, Label, type InputProps } from "@headlessui/react"
 
-interface TextFieldProps {
-  name: string
+type TextFieldProps = Omit<
+  InputProps,
+  | "className"
+  | "type"
+  | "onChange"
+  | "invalid"
+  | "aria-invalid"
+  | "aria-required"
+  | "aria-errormessage"
+> & {
   label: string
-  defaultValue?: string
   error?: string
-  disabled?: boolean
 }
 
 const TextField = ({
-  name,
-  label,
-  defaultValue,
-  error,
   disabled,
+  required,
+  label,
+  error,
+  ...props
 }: Readonly<TextFieldProps>) => {
   // set up refs to use the input as uncontrolled, thus avoiding re-renders when value changes
   const inputRef = useRef<HTMLInputElement>(null)
@@ -39,32 +44,27 @@ const TextField = ({
 
   return (
     <Field className="group" disabled={disabled}>
-      <Label
-        className={clsx("text-sm/6 font-medium data-[disabled]:opacity-50", {
-          "text-red-500": !!error,
-        })}
-      >
-        {label}
+      <Label className="text-sm/6 font-medium data-[disabled]:opacity-50">
+        {`${label}${required ? " (required)" : ""}`}
       </Label>
       <Input
         ref={inputRef}
+        className="mt-1 block w-full rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
         onChange={onChange}
-        name={name}
-        defaultValue={defaultValue}
-        className={clsx(
-          "mt-1 block w-full rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]",
-          {
-            "border-red-500 dark:border-red-500": !!error,
-          },
-        )}
+        invalid={!!error}
+        aria-required={required}
+        aria-errormessage={`${props.name}-error-message`}
+        {...props}
       />
-      <Description
-        className="text-sm/6 text-red-500"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {error}
-      </Description>
+      {error && (
+        <p
+          id={`${props.name}-error-message`}
+          className="text-sm/6 text-red-500"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
     </Field>
   )
 }

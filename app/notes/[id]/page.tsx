@@ -19,9 +19,9 @@ export default async function NoteDetail({
 
   return (
     <div className="flex h-full flex-col justify-center gap-10">
-      <h2 id="page-title" className="text-center text-2xl font-bold">
+      <h1 id="page-title" className="text-center text-3xl font-bold">
         Edit Note
-      </h2>
+      </h1>
       <div className="mx-auto w-full max-w-sm">
         <NoteForm note={note} />
       </div>

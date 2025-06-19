@@ -1,22 +1,27 @@
 import { ChangeEventHandler, useEffect, useRef, useState } from "react"
-import { Input, Field, Label, Description, Button } from "@headlessui/react"
+import { Input, Field, Label, Button, type InputProps } from "@headlessui/react"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
-import clsx from "clsx"
 
-interface PasswordFieldProps {
-  name: string
+type PasswordFieldProps = Omit<
+  InputProps,
+  | "className"
+  | "type"
+  | "onChange"
+  | "invalid"
+  | "aria-invalid"
+  | "aria-required"
+  | "aria-errormessage"
+> & {
   label: string
-  defaultValue?: string
   error?: string
-  disabled?: boolean
 }
 
 const PasswordField = ({
-  name,
-  label,
-  defaultValue,
-  error,
   disabled,
+  required,
+  label,
+  error,
+  ...props
 }: Readonly<PasswordFieldProps>) => {
   const [passwordVisible, setPasswordVisible] = useState(false)
 
@@ -42,30 +47,22 @@ const PasswordField = ({
 
   return (
     <Field className="group" disabled={disabled}>
-      <Label
-        className={clsx("text-sm/6 font-medium data-[disabled]:opacity-50", {
-          "text-red-500": !!error,
-        })}
-      >
-        {label}
+      <Label className="text-sm/6 font-medium data-[disabled]:opacity-50">
+        {`${label}${required ? " (required)" : ""}`}
       </Label>
       <div className="relative mt-1">
         <Input
           ref={inputRef}
-          onChange={onChange}
-          name={name}
-          defaultValue={defaultValue}
-          className={clsx(
-            "block w-full rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]",
-            {
-              "border-red-500 dark:border-red-500": !!error,
-            },
-          )}
+          className="block w-full rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
           type={passwordVisible ? "text" : "password"}
+          onChange={onChange}
+          invalid={!!error}
+          aria-required={required}
+          aria-errormessage={`${props.name}-error-message`}
+          {...props}
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-2">
           <Button
-            type="button"
             className="data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50"
             onClick={() =>
               setPasswordVisible((previousValue) => !previousValue)
@@ -80,13 +77,15 @@ const PasswordField = ({
           </Button>
         </div>
       </div>
-      <Description
-        className="text-sm/6 text-red-500"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {error}
-      </Description>
+      {error && (
+        <p
+          id={`${props.name}-error-message`}
+          className="text-sm/6 text-red-500"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
     </Field>
   )
 }

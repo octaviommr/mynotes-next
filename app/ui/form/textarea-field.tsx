@@ -1,23 +1,25 @@
 import { ChangeEventHandler, useEffect, useRef } from "react"
-import { Textarea, Field, Label, Description } from "@headlessui/react"
-import clsx from "clsx"
+import { Textarea, Field, Label, type TextareaProps } from "@headlessui/react"
 
-interface TextareaFieldProps {
-  name: string
+type TextareaFieldProps = Omit<
+  TextareaProps,
+  | "className"
+  | "onChange"
+  | "invalid"
+  | "aria-invalid"
+  | "aria-required"
+  | "aria-errormessage"
+> & {
   label: string
-  rows?: number
-  defaultValue?: string
   error?: string
-  disabled?: boolean
 }
 
 const TextareaField = ({
-  name,
-  label,
-  rows,
-  defaultValue,
-  error,
   disabled,
+  required,
+  label,
+  error,
+  ...props
 }: Readonly<TextareaFieldProps>) => {
   // set up refs to use the textarea as uncontrolled, thus avoiding rerenders when value changes
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -41,33 +43,27 @@ const TextareaField = ({
 
   return (
     <Field className="group" disabled={disabled}>
-      <Label
-        className={clsx("text-sm/6 font-medium data-[disabled]:opacity-50", {
-          "text-red-500": !!error,
-        })}
-      >
-        {label}
+      <Label className="text-sm/6 font-medium data-[disabled]:opacity-50">
+        {`${label}${required ? " (required)" : ""}`}
       </Label>
       <Textarea
         ref={textareaRef}
+        className="mt-1 block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
         onChange={onChange}
-        name={name}
-        rows={rows}
-        defaultValue={defaultValue}
-        className={clsx(
-          "mt-1 block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]",
-          {
-            "border-red-500 dark:border-red-500": !!error,
-          },
-        )}
+        invalid={!!error}
+        aria-required={required}
+        aria-errormessage={`${props.name}-error-message`}
+        {...props}
       />
-      <Description
-        className="text-sm/6 text-red-500"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {error}
-      </Description>
+      {error && (
+        <p
+          id={`${props.name}-error-message`}
+          className="text-sm/6 text-red-500"
+          role="alert"
+        >
+          {error}
+        </p>
+      )}
     </Field>
   )
 }

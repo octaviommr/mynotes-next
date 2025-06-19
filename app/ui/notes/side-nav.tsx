@@ -42,7 +42,6 @@ export default function SideNav() {
       </Link>
       <span className="flex-1" />
       <Button
-        type="button"
         className="flex items-center justify-center gap-2 rounded-md p-3 hover:bg-[var(--secondary-background)] md:justify-start md:p-2 md:px-3"
         onClick={() => logOut()}
       >

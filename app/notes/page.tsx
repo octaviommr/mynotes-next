@@ -12,16 +12,16 @@ export default async function NoteBoard() {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-4">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
         {notes.map((note) => (
           <NoteBoardItem key={note.id} note={note} />
         ))}
-      </div>
+      </ul>
       {!notes.length && (
-        <div className="flex h-full flex-col items-center justify-center gap-4">
+        <div className="flex h-full items-center justify-center gap-2">
           <p>No notes yet.</p>
           <Link href="/notes/create" className="text-sm/6 font-medium">
-            Add Note
+            Add One
           </Link>
         </div>
       )}

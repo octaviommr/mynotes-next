@@ -49,7 +49,7 @@ interface ModalControlContextType {
 const ModalContext = createContext<ModalState | null>(null)
 const ModalControlContext = createContext<ModalControlContextType | null>(null)
 
-let resolveResult: (value: boolean) => void // this will hold the function used to resolve the promise of the modal result
+let resolveResult: (value: boolean) => void // this will hold the resolver function for the promise of the modal result
 
 function modalReducer(state: ModalState, action: ModalAction): ModalState {
   switch (action.type) {
@@ -87,12 +87,12 @@ export default function ModalProvider({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const controlContextValue = useMemo(() => ({ showModal, closeModal }), [])
   /*    
-    NOTE: We should always use a memoized object for the context value to make sure it doesn't change, by creating a new
-    object, when the component is re-rendered and there's no actual change in the context value. And, to make sure there's
-    no undesired changes in the context value, we should always use memoized functions.
+    NOTE: We should always use a memoized object for the context value to make sure it doesn't change when the component is
+    re-rendered (by creating a new object) and there's no actual change in the context value. And to make sure there's no
+    undesired changes in the context value, we should always use memoized functions too.
 
     React re-renders children that are subscribed to the context whenever the context value changes. The above ensures
-    there's no unnecessary re-renders, which can harm performance.
+    there are no unnecessary re-renders, which can harm performance.
   */
 
   return (

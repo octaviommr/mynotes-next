@@ -17,10 +17,9 @@ export default function Error({
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4">
-      <h2 className="text-2xl font-bold">Ooops...</h2>
+      <h1 className="text-3xl font-bold">Ooops...</h1>
       <p>Something went wrong.</p>
       <Button
-        type="button"
         className="rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold"
         onClick={
           // attempt to recover by trying to re-render the route segment where the error ocurred
