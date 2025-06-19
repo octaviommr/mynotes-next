@@ -2,27 +2,29 @@
 
 A very simple full-stack note board application, written for sandboxing and demonstration purposes.
 
-It showcases the Next.js framework, specially the front-end features, since front-end development is my main area of interest and one I'm passionate about.
+It showcases the Next.js framework, specially the frontend features, since frontend development is my main area of interest, and one I'm passionate about.
 
 Below is a breakdown of the most relevant application features:
 
-### Front-end
+### Frontend
 
 - TypeScript code for static type checking
-- State management using Context API and reducers
-- Tailwind CSS styling (with Headless UI and Heroicons)
-- Accessibility by using ARIA roles and attributes and by ensuring color contrast
-- Streaming using "loading.tsx" files, leveraging React Suspense
+- Context API and reducers for state management
+- Tailwind CSS for styling (with Headless UI and Heroicons)
+- Accessibility by using semantic HTML, ARIA roles and attributes, and by ensuring color contrast
+- Streaming using "loading.tsx" files leveraging React Suspense
 - Graceful error handling
 - Metadata templates
 
-### Back-end
+### Backend
 
 - MongoDB database
-- Data modelling and validation using mongoose
-- Data mutation using React Server Actions
-- Authentication and authorization using the "next-auth" package of Auth.js and Next.js middleware
+- mongoose for data modelling and validation
+- React Server Actions for data mutation
+- next-auth and Next.js middleware for authentication and authorization
 - Graceful error handling
+
+This is a personal project so I'm not accepting contributions at the moment.
 
 ## Running locally
 
@@ -42,8 +44,14 @@ Create a ".env.local" file containing the following key and value representing t
 
 Typically, a local MongoDB instance address looks like `mongodb://127.0.0.1:27017/your-database-name-goes-here`. If you're using MongoDB Atlas, use the connection string that is provided for your instance.
 
-Run `npx auth secret` to generate a secret key that will be used to encrypt Auth.js cookies. This will also add it to the ".env.local" file.
+Run `npx auth secret` to generate a secret key that will be used to encrypt next-auth cookies. This will also add it to the ".env.local" file.
 
 ### Build and start
 
 Run `npm run dev` to build the application and start the development server. The application can be accessed via http://localhost:3000.
+
+## Next Steps
+
+- Implement containerization using Docker
+- Deploy the application
+- Automate deployment using GitHub actions
