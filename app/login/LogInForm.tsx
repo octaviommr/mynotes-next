@@ -1,21 +1,20 @@
 "use client"
 
+import { useSearchParams } from "next/navigation"
 import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
-import {
-  FormActionState,
-  SignUpValidationErrors,
-  signUp,
-} from "@/app/lib/actions"
-import TextField from "../form/text-field"
-import PasswordField from "../form/password-field"
-import { useMessageDispatch } from "../messages/message-context"
+import { type LogInActionState, logIn } from "@/lib/actions"
+import TextField from "@/components/ui/form/TextField"
+import PasswordField from "@/components/ui/form/PasswordField"
+import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
-export default function SignUpForm() {
+export default function LogInForm() {
+  const searchParams = useSearchParams()
+
   const [actionState, formAction, isPending] = useActionState<
-    FormActionState<SignUpValidationErrors>,
+    LogInActionState,
     FormData
-  >(signUp, {})
+  >(logIn, { callbackUrl: searchParams.get("callbackUrl") ?? undefined })
 
   const dispatchMessage = useMessageDispatch()
 
@@ -40,26 +39,21 @@ export default function SignUpForm() {
           name="email"
           label="Email"
           error={actionState.validationErrors?.email}
-          required
         />
-        <TextField
-          name="name"
-          label="Name"
-          error={actionState.validationErrors?.name}
-          required
-        />
+        {/* 
+          NOTE: No need to mark this field as required, since it's already obvious for users that the email field is
+          required when logging in
+        */}
+
         <PasswordField
           name="password"
           label="Password"
           error={actionState.validationErrors?.password}
-          required
         />
-        <PasswordField
-          name="confirmationPassword"
-          label="Confirm Password"
-          error={actionState.validationErrors?.confirmationPassword}
-          required
-        />
+        {/*
+          NOTE: For security reasons, we want to give potential attackers as few hints as possible about the password.
+          Therefore, we won't mark the field as required.
+        */}
       </section>
       <section className="mt-8 flex flex-col">
         <Button
@@ -67,7 +61,7 @@ export default function SignUpForm() {
           className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
           disabled={isPending}
         >
-          Sign Up
+          Log In
         </Button>
       </section>
     </form>

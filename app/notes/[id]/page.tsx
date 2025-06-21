@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getNote } from "@/app/lib/data"
-import NoteForm from "@/app/ui/notes/note-form"
+import { getNote } from "@/lib/data"
+import NoteForm from "../components/NoteForm"
 
 export const metadata: Metadata = {
   title: "Edit Note",

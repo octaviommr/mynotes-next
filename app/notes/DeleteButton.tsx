@@ -5,10 +5,10 @@ import { TrashIcon } from "@heroicons/react/20/solid"
 import {
   deleteNote as runDeleteNoteAction,
   revalidateNotes,
-} from "@/app/lib/actions"
-import { Note } from "@/app/models/Note"
-import { useMessageDispatch } from "../messages/message-context"
-import { useModalControl } from "../modals/modal-context"
+} from "@/lib/actions"
+import type { Note } from "@/models/Note"
+import { useMessageDispatch } from "@/contexts/message/MessageContext"
+import { useModalControl } from "@/contexts/modal/ModalContext"
 
 export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
   const dispatchMessage = useMessageDispatch()

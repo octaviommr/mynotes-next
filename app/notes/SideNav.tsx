@@ -9,7 +9,7 @@ import {
   ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/24/outline"
 import clsx from "clsx"
-import { logOut } from "@/app/lib/actions"
+import { logOut } from "@/lib/actions"
 
 export default function SideNav() {
   const path = usePathname()

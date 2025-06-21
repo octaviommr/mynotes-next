@@ -1,4 +1,4 @@
-import SideNav from "../ui/notes/side-nav"
+import SideNav from "./SideNav"
 
 export default function NotesLayout({
   children,

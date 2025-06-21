@@ -3,21 +3,16 @@
 import Link from "next/link"
 import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
-import {
-  FormActionState,
-  NoteValidationErrors,
-  createNote,
-  updateNote,
-} from "@/app/lib/actions"
-import { Note } from "@/app/models/Note"
-import TextField from "../form/text-field"
-import TextareaField from "../form/textarea-field"
-import CheckboxField from "../form/checkbox-field"
-import { useMessageDispatch } from "../messages/message-context"
+import { type NoteActionState, createNote, updateNote } from "@/lib/actions"
+import type { Note } from "@/models/Note"
+import TextField from "@/components/ui/form/TextField"
+import TextareaField from "@/components/ui/form/TextareaField"
+import CheckboxField from "@/components/ui/form/CheckboxField"
+import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
 export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
   const [actionState, formAction, isPending] = useActionState<
-    FormActionState<NoteValidationErrors>,
+    NoteActionState,
     FormData
   >(note ? updateNote.bind(null, note.id) : createNote, {})
   /*

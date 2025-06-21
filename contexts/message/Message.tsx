@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import Alert from "./alert"
-import { useMessage, useMessageDispatch } from "./message-context"
+import Alert from "./Alert"
+import { useMessage, useMessageDispatch } from "./MessageContext"
 
 export default function Message() {
   const { open, message } = useMessage()

@@ -6,24 +6,26 @@ import { isRedirectError } from "next/dist/client/components/redirect"
 import { AuthError } from "next-auth"
 import mongoose from "mongoose"
 import bcrypt from "bcrypt"
-import dbConnect from "./db-connect"
-import NoteModel, { NoteDocument } from "../models/Note"
-import UserModel from "../models/User"
-import { auth, signIn, signOut } from "@/auth"
+import NoteModel, { type NoteDocument } from "@/models/Note"
+import UserModel from "@/models/User"
+import dbConnect from "./dbConnect"
+import { auth, signIn, signOut } from "./auth"
 
 interface ActionState {
   error?: string
 }
 
-export interface FormActionState<T> extends ActionState {
+interface FormActionState<T> extends ActionState {
   validationErrors?: T
 }
 
-export interface NoteValidationErrors {
+interface NoteValidationErrors {
   title?: string
 }
 
-export interface LogInValidationErrors {
+export type NoteActionState = FormActionState<NoteValidationErrors>
+
+interface LogInValidationErrors {
   email?: string
   password?: string
 }
@@ -33,17 +35,19 @@ export interface LogInActionState
   callbackUrl?: string
 }
 
-export interface SignUpValidationErrors {
+interface SignUpValidationErrors {
   email?: string
   name?: string
   password?: string
   confirmationPassword?: string
 }
 
+export type SignUpActionState = FormActionState<SignUpValidationErrors>
+
 const handleNoteValidationErrors = (
   error: mongoose.Error.ValidationError,
-): FormActionState<NoteValidationErrors> => {
-  const state: FormActionState<NoteValidationErrors> = {
+): NoteActionState => {
+  const state: NoteActionState = {
     validationErrors: { title: error.errors["title"]?.message },
   }
 
@@ -59,7 +63,7 @@ const handleNoteValidationErrors = (
 
 const handleLogInValidationErrors = (
   error: mongoose.Error.ValidationError,
-): FormActionState<LogInValidationErrors> => {
+): LogInActionState => {
   return {
     validationErrors: {
       email: error?.errors["email"]?.message,
@@ -71,7 +75,7 @@ const handleLogInValidationErrors = (
 const handleSignUpValidationErrors = (
   error?: mongoose.Error.ValidationError,
   confirmationPasswordError?: string,
-): FormActionState<SignUpValidationErrors> => {
+): SignUpActionState => {
   return {
     validationErrors: {
       email: error?.errors["email"]?.message,
@@ -102,9 +106,9 @@ const validateConfirmationPassword = (
   the scenes, these create "POST" API endpoints)
 */
 export async function createNote(
-  prevState: FormActionState<NoteValidationErrors>,
+  prevState: NoteActionState,
   formData: FormData,
-): Promise<FormActionState<NoteValidationErrors>> {
+): Promise<NoteActionState> {
   const { title, content, important } = Object.fromEntries(formData.entries())
   const session = await auth()
 
@@ -143,9 +147,9 @@ export async function createNote(
 
 export async function updateNote(
   id: string,
-  prevState: FormActionState<NoteValidationErrors>,
+  prevState: NoteActionState,
   formData: FormData,
-): Promise<FormActionState<NoteValidationErrors>> {
+): Promise<NoteActionState> {
   const { title, content, important } = Object.fromEntries(formData.entries())
   const session = await auth()
 
@@ -310,9 +314,9 @@ export async function logOut() {
 }
 
 export async function signUp(
-  prevState: FormActionState<SignUpValidationErrors>,
+  prevState: SignUpActionState,
   formData: FormData,
-): Promise<FormActionState<SignUpValidationErrors>> {
+): Promise<SignUpActionState> {
   const { email, name, password, confirmationPassword } = Object.fromEntries(
     formData.entries(),
   )

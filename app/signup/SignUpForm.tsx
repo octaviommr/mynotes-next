@@ -2,19 +2,16 @@
 
 import { useActionState, useEffect } from "react"
 import { Button } from "@headlessui/react"
-import { LogInActionState, logIn } from "@/app/lib/actions"
-import TextField from "../form/text-field"
-import PasswordField from "../form/password-field"
-import { useMessageDispatch } from "../messages/message-context"
-import { useSearchParams } from "next/navigation"
+import { type SignUpActionState, signUp } from "@/lib/actions"
+import TextField from "@/components/ui/form/TextField"
+import PasswordField from "@/components/ui/form/PasswordField"
+import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
-export default function LogInForm() {
-  const searchParams = useSearchParams()
-
+export default function SignUpForm() {
   const [actionState, formAction, isPending] = useActionState<
-    LogInActionState,
+    SignUpActionState,
     FormData
-  >(logIn, { callbackUrl: searchParams.get("callbackUrl") ?? undefined })
+  >(signUp, {})
 
   const dispatchMessage = useMessageDispatch()
 
@@ -39,21 +36,26 @@ export default function LogInForm() {
           name="email"
           label="Email"
           error={actionState.validationErrors?.email}
+          required
         />
-        {/* 
-          NOTE: No need to mark this field as required, since it's already obvious for users that the email field is
-          required when logging in
-        */}
-
+        <TextField
+          name="name"
+          label="Name"
+          error={actionState.validationErrors?.name}
+          required
+        />
         <PasswordField
           name="password"
           label="Password"
           error={actionState.validationErrors?.password}
+          required
         />
-        {/*
-          NOTE: For security reasons, we want to give potential attackers as few hints as possible about the password.
-          Therefore, we won't mark the field as required.
-        */}
+        <PasswordField
+          name="confirmationPassword"
+          label="Confirm Password"
+          error={actionState.validationErrors?.confirmationPassword}
+          required
+        />
       </section>
       <section className="mt-8 flex flex-col">
         <Button
@@ -61,7 +63,7 @@ export default function LogInForm() {
           className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
           disabled={isPending}
         >
-          Log In
+          Sign Up
         </Button>
       </section>
     </form>

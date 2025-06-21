@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import SignUpForm from "../ui/auth/sign-up-form"
+import SignUpForm from "./SignUpForm"
 
 export const metadata: Metadata = {
   title: "Sign Up",

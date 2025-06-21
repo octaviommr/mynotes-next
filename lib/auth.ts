@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import bcrypt from "bcrypt"
-import UserModel from "./app/models/User"
+import UserModel from "@/models/User"
 
 /*
   Create an Auth.js object for signing in/out users and to provide access to the user session.

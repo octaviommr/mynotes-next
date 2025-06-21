@@ -5,7 +5,7 @@ import {
   DialogTitle,
   Button,
 } from "@headlessui/react"
-import { useModal, useModalControl } from "./modal-context"
+import { useModal, useModalControl } from "./ModalContext"
 
 export default function Modal() {
   const { open, modal } = useModal()

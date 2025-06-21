@@ -1,8 +1,9 @@
 "use client"
 
 import { createContext, Dispatch, Reducer, useContext, useReducer } from "react"
-import Message from "./message"
-import { MessageSeverity } from "./alert"
+import Message from "./Message"
+
+export type MessageSeverity = "error" | "warning" | "info" | "success"
 
 interface MessageType {
   severity: MessageSeverity

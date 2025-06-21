@@ -5,8 +5,7 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/24/solid"
 import clsx from "clsx"
-
-export type MessageSeverity = "error" | "warning" | "info" | "success"
+import type { MessageSeverity } from "./MessageContext"
 
 interface AlertProps {
   severity: MessageSeverity

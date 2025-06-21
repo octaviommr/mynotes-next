@@ -1,6 +1,6 @@
-import dbConnect from "./db-connect"
-import NoteModel, { Note, makeNote } from "@/app/models/Note"
-import { auth } from "@/auth"
+import NoteModel, { type Note, makeNote } from "@/models/Note"
+import dbConnect from "./dbConnect"
+import { auth } from "./auth"
 
 // data fetching methods called inside server components
 export const getNotes = async (): Promise<Note[]> => {
