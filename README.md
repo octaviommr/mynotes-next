@@ -52,7 +52,8 @@ Run `npm run dev` to build the application and start the development server. The
 
 ## Next Steps
 
-- Add tests
+- Add tests using Playwright (with Playwright-BDD)
+- Build a Tailwind CSS theme
 - Implement containerization using Docker
 - Deploy the application
 - Automate deployment using GitHub actions
