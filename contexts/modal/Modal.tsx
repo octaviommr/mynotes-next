@@ -3,8 +3,8 @@ import {
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-  Button,
 } from "@headlessui/react"
+import Button from "@/components/ui/Button"
 import { useModal, useModalControl } from "./ModalContext"
 
 export default function Modal() {
@@ -29,17 +29,11 @@ export default function Modal() {
               <p>{modal.content}</p>
               <div className="flex justify-end gap-4">
                 {modal.type === "alert" && (
-                  <Button
-                    className="rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold"
-                    onClick={() => closeModal(false)}
-                  >
+                  <Button onClick={() => closeModal(false)} variant="secondary">
                     {modal.cancelLabel}
                   </Button>
                 )}
-                <Button
-                  className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
-                  onClick={() => closeModal(true)}
-                >
+                <Button onClick={() => closeModal(true)}>
                   {modal.okLabel}
                 </Button>
               </div>

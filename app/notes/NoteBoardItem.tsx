@@ -1,6 +1,6 @@
-import Link from "next/link"
 import { PencilSquareIcon } from "@heroicons/react/16/solid"
 import type { Note } from "@/models/Note"
+import Link from "@/components/ui/Link"
 import DeleteButton from "./DeleteButton"
 
 export default function NoteBoardItem({ note }: Readonly<{ note: Note }>) {

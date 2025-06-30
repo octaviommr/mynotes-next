@@ -1,12 +1,13 @@
-import Link from "next/link"
 import { ArrowRightIcon } from "@heroicons/react/20/solid"
+import PageTitle from "@/components/ui/pages/PageTitle"
+import Link from "@/components/ui/Link"
 
 export default function Home() {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4">
-      <h1 className="text-3xl font-bold">Welcome to MyNotes!</h1>
-      <Link href="/notes" className="flex items-center gap-2">
-        <span className="text-sm/6 font-medium">Go to Note Board</span>
+      <PageTitle title="Welcome to MyNotes!" />
+      <Link href="/notes">
+        <span>Go to Note Board</span>
         <ArrowRightIcon className="size-5" />
       </Link>
     </div>

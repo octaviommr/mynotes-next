@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getNote } from "@/lib/data"
+import FormPage from "@/components/ui/pages/FormPage"
 import NoteForm from "../components/NoteForm"
 
 export const metadata: Metadata = {
@@ -18,13 +19,8 @@ export default async function NoteDetail({
   }
 
   return (
-    <div className="flex h-full flex-col justify-center gap-10">
-      <h1 id="page-title" className="text-center text-3xl font-bold">
-        Edit Note
-      </h1>
-      <div className="mx-auto w-full max-w-sm">
-        <NoteForm note={note} />
-      </div>
-    </div>
+    <FormPage title="Edit Note">
+      <NoteForm note={note} />
+    </FormPage>
   )
 }

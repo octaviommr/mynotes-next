@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { getNotes } from "@/lib/data"
+import Link from "@/components/ui/Link"
 import NoteBoardItem from "./NoteBoardItem"
 
 export const metadata: Metadata = {
@@ -20,9 +20,7 @@ export default async function NoteBoard() {
       {!notes.length && (
         <div className="flex h-full items-center justify-center gap-2">
           <p>No notes yet.</p>
-          <Link href="/notes/create" className="text-sm/6 font-medium">
-            Add One
-          </Link>
+          <Link href="/notes/create">Add One</Link>
         </div>
       )}
     </>

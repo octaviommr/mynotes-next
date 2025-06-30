@@ -1,13 +1,11 @@
-import Link from "next/link"
+import ErrorPage from "@/components/ui/pages/ErrorPage"
+import Link from "@/components/ui/Link"
 
 export default function NotFoundNote() {
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4">
-      <h1 className="text-3xl font-bold">Ooops...</h1>
+    <ErrorPage>
       <p>Note not found.</p>
-      <Link href="/notes" className="text-sm/6 font-medium">
-        Go to Note Board
-      </Link>
-    </div>
+      <Link href="/notes">Go to Note Board</Link>
+    </ErrorPage>
   )
 }

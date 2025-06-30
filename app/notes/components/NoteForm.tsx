@@ -1,13 +1,13 @@
 "use client"
 
-import Link from "next/link"
 import { useActionState, useEffect } from "react"
-import { Button } from "@headlessui/react"
 import { type NoteActionState, createNote, updateNote } from "@/lib/actions"
 import type { Note } from "@/models/Note"
 import TextField from "@/components/ui/form/TextField"
 import TextareaField from "@/components/ui/form/TextareaField"
 import CheckboxField from "@/components/ui/form/CheckboxField"
+import Button from "@/components/ui/Button"
+import Link from "@/components/ui/Link"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
 export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
@@ -37,7 +37,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
   }, [actionState])
 
   return (
-    <form action={formAction} aria-labelledby="page-title">
+    <form action={formAction}>
       <section className="flex flex-col gap-6">
         <TextField
           name="title"
@@ -59,14 +59,8 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
         />
       </section>
       <section className="mt-8 flex items-center justify-end gap-4">
-        <Link href="/notes" className="text-sm/6 font-medium">
-          Cancel
-        </Link>
-        <Button
-          type="submit"
-          className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
-          disabled={isPending}
-        >
+        <Link href="/notes">Cancel</Link>
+        <Button type="submit" disabled={isPending}>
           {note ? "Update" : "Create"}
         </Button>
       </section>

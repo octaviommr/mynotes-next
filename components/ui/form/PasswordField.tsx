@@ -1,6 +1,9 @@
-import { ChangeEventHandler, useEffect, useRef, useState } from "react"
-import { Input, Field, Label, Button, type InputProps } from "@headlessui/react"
+import { useState } from "react"
+import { Field, Button, type InputProps } from "@headlessui/react"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
+import Label from "./Label"
+import Input from "./Input"
+import ErrorMessage from "./ErrorMessage"
 
 type PasswordFieldProps = Omit<
   InputProps,
@@ -11,54 +14,34 @@ type PasswordFieldProps = Omit<
   | "aria-invalid"
   | "aria-required"
   | "aria-errormessage"
-> & {
-  label: string
-  error?: string
-}
+> &
+  Readonly<{
+    label: string
+    error?: string
+  }>
 
 const PasswordField = ({
+  name,
   disabled,
   required,
   label,
   error,
   ...props
-}: Readonly<PasswordFieldProps>) => {
+}: PasswordFieldProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false)
 
-  // set up refs to use the input as uncontrolled, thus avoiding re-renders when value changes
-  const inputRef = useRef<HTMLInputElement>(null)
-  const valueRef = useRef<string>()
-
-  const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    valueRef.current = event.target.value
-  }
-
-  /*
-    Set input value using the stored value.
-
-    We don't use the input's "value" prop to set the value directly because components are supposed to be pure functions,
-    meaning the JSX should always be the same for the same inputs (props, state and context).
-  */
-  useEffect(() => {
-    if (valueRef.current !== undefined) {
-      inputRef.current!.value = valueRef.current
-    }
-  })
+  const errorMessageId = `${name}-error-message`
 
   return (
     <Field className="group" disabled={disabled}>
-      <Label className="text-sm/6 font-medium data-[disabled]:opacity-50">
-        {`${label}${required ? " (required)" : ""}`}
-      </Label>
+      <Label label={label} required={required} />
       <div className="relative mt-1">
         <Input
-          ref={inputRef}
-          className="block w-full rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
+          name={name}
           type={passwordVisible ? "text" : "password"}
-          onChange={onChange}
           invalid={!!error}
-          aria-required={required}
-          aria-errormessage={`${props.name}-error-message`}
+          required={required}
+          errorMessageId={errorMessageId}
           {...props}
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -77,15 +60,7 @@ const PasswordField = ({
           </Button>
         </div>
       </div>
-      {error && (
-        <p
-          id={`${props.name}-error-message`}
-          className="text-sm/6 text-red-500"
-          role="alert"
-        >
-          {error}
-        </p>
-      )}
+      {error && <ErrorMessage id={errorMessageId} message={error} />}
     </Field>
   )
 }

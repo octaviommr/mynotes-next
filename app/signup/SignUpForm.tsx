@@ -1,10 +1,10 @@
 "use client"
 
 import { useActionState, useEffect } from "react"
-import { Button } from "@headlessui/react"
 import { type SignUpActionState, signUp } from "@/lib/actions"
 import TextField from "@/components/ui/form/TextField"
 import PasswordField from "@/components/ui/form/PasswordField"
+import Button from "@/components/ui/Button"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
 export default function SignUpForm() {
@@ -57,12 +57,8 @@ export default function SignUpForm() {
           required
         />
       </section>
-      <section className="mt-8 flex flex-col">
-        <Button
-          type="submit"
-          className="rounded-md border border-solid border-[var(--border)] bg-[var(--secondary-background)] px-3 py-1.5 text-sm/6 font-semibold"
-          disabled={isPending}
-        >
+      <section className="mt-8">
+        <Button type="submit" disabled={isPending} fullWidth>
           Sign Up
         </Button>
       </section>

@@ -7,12 +7,10 @@ import {
 import clsx from "clsx"
 import type { MessageSeverity } from "./MessageContext"
 
-interface AlertProps {
-  severity: MessageSeverity
-  message: string
-}
-
-export default function Alert({ severity, message }: Readonly<AlertProps>) {
+export default function Alert({
+  severity,
+  message,
+}: Readonly<{ severity: MessageSeverity; message: string }>) {
   return (
     <div
       className="flex max-w-lg items-center gap-2 rounded-md border border-solid border-[var(--border)] bg-[var(--main-background)] p-4"

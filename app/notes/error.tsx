@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect } from "react"
-import { Button } from "@headlessui/react"
+import ErrorPage from "@/components/ui/pages/ErrorPage"
+import Button from "@/components/ui/Button"
 
 export default function Error({
   error,
@@ -16,11 +17,9 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4">
-      <h1 className="text-3xl font-bold">Ooops...</h1>
+    <ErrorPage>
       <p>Something went wrong.</p>
       <Button
-        className="rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold"
         onClick={
           // attempt to recover by trying to re-render the route segment where the error ocurred
           () => reset()
@@ -28,6 +27,6 @@ export default function Error({
       >
         Try Again
       </Button>
-    </div>
+    </ErrorPage>
   )
 }
