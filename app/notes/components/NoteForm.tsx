@@ -10,7 +10,13 @@ import Button from "@/components/ui/Button"
 import Link from "@/components/ui/Link"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
-export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
+export default function NoteForm({
+  note,
+  ...props
+}: Readonly<{
+  note?: Note
+  "aria-labelledby": string
+}>) {
   const [actionState, formAction, isPending] = useActionState<
     NoteActionState,
     FormData
@@ -37,7 +43,7 @@ export default function NoteForm({ note }: Readonly<{ note?: Note }>) {
   }, [actionState])
 
   return (
-    <form action={formAction}>
+    <form action={formAction} aria-labelledby={props["aria-labelledby"]}>
       <section className="flex flex-col gap-6">
         <TextField
           name="title"

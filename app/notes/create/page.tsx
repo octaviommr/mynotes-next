@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import FormPage from "@/components/ui/pages/FormPage"
+import FormPage, { TITLE_ID } from "@/components/ui/pages/FormPage"
 import NoteForm from "../components/NoteForm"
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function NewNote() {
   return (
     <FormPage title="New Note">
-      <NoteForm />
+      <NoteForm aria-labelledby={TITLE_ID} />
     </FormPage>
   )
 }

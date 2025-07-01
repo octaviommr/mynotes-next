@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getNote } from "@/lib/data"
-import FormPage from "@/components/ui/pages/FormPage"
+import FormPage, { TITLE_ID } from "@/components/ui/pages/FormPage"
 import NoteForm from "../components/NoteForm"
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default async function NoteDetail({
 
   return (
     <FormPage title="Edit Note">
-      <NoteForm note={note} />
+      <NoteForm note={note} aria-labelledby={TITLE_ID} />
     </FormPage>
   )
 }

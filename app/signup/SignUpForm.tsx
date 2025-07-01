@@ -7,7 +7,9 @@ import PasswordField from "@/components/ui/form/PasswordField"
 import Button from "@/components/ui/Button"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
-export default function SignUpForm() {
+export default function SignUpForm(
+  props: Readonly<{ "aria-labelledby": string }>,
+) {
   const [actionState, formAction, isPending] = useActionState<
     SignUpActionState,
     FormData
@@ -30,7 +32,7 @@ export default function SignUpForm() {
   }, [actionState])
 
   return (
-    <form action={formAction}>
+    <form action={formAction} aria-labelledby={props["aria-labelledby"]}>
       <section className="flex flex-col gap-6">
         <TextField
           name="email"

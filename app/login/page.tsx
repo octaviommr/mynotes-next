@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import FormPage from "@/components/ui/pages/FormPage"
+import FormPage, { TITLE_ID } from "@/components/ui/pages/FormPage"
 import Link from "@/components/ui/Link"
 import LogInForm from "./LogInForm"
 
@@ -18,7 +18,7 @@ export default function LogIn() {
         </footer>
       )}
     >
-      <LogInForm />
+      <LogInForm aria-labelledby={TITLE_ID} />
     </FormPage>
   )
 }
