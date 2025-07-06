@@ -1,7 +1,5 @@
-import { Field, type InputProps } from "@headlessui/react"
-import Label from "./Label"
-import Input from "./Input"
-import ErrorMessage from "./ErrorMessage"
+import type { InputProps } from "@headlessui/react"
+import InputField from "./InputField"
 
 type TextFieldProps = Omit<
   InputProps,
@@ -18,31 +16,6 @@ type TextFieldProps = Omit<
     error?: string
   }>
 
-const TextField = ({
-  name,
-  disabled,
-  required,
-  label,
-  error,
-  ...props
-}: TextFieldProps) => {
-  const errorMessageId = `${name}-error-message`
-
-  return (
-    <Field className="group" disabled={disabled}>
-      <Label label={label} required={required} />
-      <div className="mt-1">
-        <Input
-          name={name}
-          invalid={!!error}
-          required={required}
-          errorMessageId={errorMessageId}
-          {...props}
-        />
-      </div>
-      {error && <ErrorMessage id={errorMessageId} message={error} />}
-    </Field>
-  )
+export default function TextField(props: TextFieldProps) {
+  return <InputField {...props} />
 }
-
-export default TextField

@@ -17,14 +17,14 @@ type TextareaFieldProps = Omit<
     error?: string
   }>
 
-const TextareaField = ({
+export default function TextareaField({
   name,
   disabled,
   required,
   label,
   error,
   ...props
-}: TextareaFieldProps) => {
+}: TextareaFieldProps) {
   // set up refs to use the textarea as uncontrolled, thus avoiding rerenders when value changes
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const valueRef = useRef<string>()
@@ -66,5 +66,3 @@ const TextareaField = ({
     </Field>
   )
 }
-
-export default TextareaField

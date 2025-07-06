@@ -19,7 +19,7 @@ export default function Button({
   return (
     <HeadlessButton
       className={clsx(
-        "flex items-center justify-center gap-2 rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold",
+        "rounded-md border border-solid border-[var(--border)] px-3 py-1.5 text-sm/6 font-semibold",
         {
           "bg-[var(--secondary-background)]": variant !== "secondary",
           "w-full": fullWidth,

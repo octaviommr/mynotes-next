@@ -7,7 +7,11 @@ type CheckboxFieldProps = Omit<CheckboxProps, "className" | "value"> &
     label: string
   }>
 
-const CheckboxField = ({ disabled, label, ...props }: CheckboxFieldProps) => {
+export default function CheckboxField({
+  disabled,
+  label,
+  ...props
+}: CheckboxFieldProps) {
   return (
     <Field className="flex items-center gap-2" disabled={disabled}>
       <Label label={label} />
@@ -21,5 +25,3 @@ const CheckboxField = ({ disabled, label, ...props }: CheckboxFieldProps) => {
     </Field>
   )
 }
-
-export default CheckboxField

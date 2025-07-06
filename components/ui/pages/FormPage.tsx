@@ -17,7 +17,7 @@ export default function FormPage({
     <div className="flex h-full flex-col justify-center gap-10">
       <PageTitle id={TITLE_ID} title={title} />
       <div className="mx-auto w-full max-w-sm">{children}</div>
-      {footer && footer()}
+      {footer?.()}
     </div>
   )
 }
