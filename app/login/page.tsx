@@ -11,12 +11,12 @@ export default function LogIn() {
   return (
     <FormPage
       title="Log In"
-      footer={() => (
+      footer={
         <footer className="flex items-center justify-center gap-2">
           <p>Don&apos;t have an account yet?</p>
           <Link href="/signup">Sign Up</Link>
         </footer>
-      )}
+      }
     >
       <LogInForm aria-labelledby={TITLE_ID} />
     </FormPage>

@@ -8,16 +8,14 @@ export default function FormPage({
   footer,
 }: Readonly<{
   title: string
-  titleId?: string
-  formLabelId?: string
   children: React.ReactNode
-  footer?: () => React.ReactNode
+  footer?: React.ReactNode
 }>) {
   return (
     <div className="flex h-full flex-col justify-center gap-10">
       <PageTitle id={TITLE_ID} title={title} />
       <div className="mx-auto w-full max-w-sm">{children}</div>
-      {footer?.()}
+      {footer}
     </div>
   )
 }
