@@ -3,7 +3,7 @@ export default function ErrorMessage({
   message,
 }: Readonly<{ id: string; message: string }>) {
   return (
-    <p id={id} className="text-sm/6 text-red-500" role="alert">
+    <p id={id} className="mt-1 text-sm/6 text-red-500" role="alert">
       {message}
     </p>
   )

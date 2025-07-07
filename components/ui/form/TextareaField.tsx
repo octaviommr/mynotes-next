@@ -50,18 +50,16 @@ export default function TextareaField({
   return (
     <Field className="group" disabled={disabled}>
       <Label label={label} required={required} />
-      <div className="mt-1">
-        <Textarea
-          ref={textareaRef}
-          name={name}
-          className="block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
-          onChange={onChange}
-          invalid={!!error}
-          aria-required={required}
-          aria-errormessage={errorMessageId}
-          {...props}
-        />
-      </div>
+      <Textarea
+        ref={textareaRef}
+        name={name}
+        className="mt-1 block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
+        onChange={onChange}
+        invalid={!!error}
+        aria-required={required}
+        aria-errormessage={errorMessageId}
+        {...props}
+      />
       {error && <ErrorMessage id={errorMessageId} message={error} />}
     </Field>
   )
