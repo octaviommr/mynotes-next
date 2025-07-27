@@ -2,7 +2,7 @@
 
 A very simple full-stack note board application, written for sandboxing and demonstration purposes.
 
-It showcases the Next.js framework, specially the frontend features, since frontend development is my main area of interest, and one I'm passionate about.
+It showcases the Next.js framework, specially the frontend features, since frontend development is my main area of interest and one I'm passionate about.
 
 Below is a breakdown of the most relevant application features:
 
