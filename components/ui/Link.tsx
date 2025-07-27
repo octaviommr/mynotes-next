@@ -1,11 +1,18 @@
+import { forwardRef } from "react"
 import NextLink from "next/link"
+import clsx from "clsx"
 
-type LinkProps = Omit<React.ComponentProps<typeof NextLink>, "className">
-
-export default function Link({ children, ...props }: LinkProps) {
+export default forwardRef<
+  React.ComponentRef<typeof NextLink>,
+  React.ComponentProps<typeof NextLink>
+>(function Link({ className, children, ...props }, ref) {
   return (
-    <NextLink className="text-sm/6 font-medium" {...props}>
+    <NextLink
+      ref={ref}
+      className={clsx("text-sm/6 font-medium", className)}
+      {...props}
+    >
       {children}
     </NextLink>
   )
-}
+})

@@ -44,7 +44,7 @@ export default function NoteForm({
 
   return (
     <form action={formAction} aria-labelledby={props["aria-labelledby"]}>
-      <section className="flex flex-col gap-6">
+      <section className="flex flex-col gap-8">
         <TextField
           name="title"
           label="Title"
@@ -62,6 +62,7 @@ export default function NoteForm({
           name="important"
           label="Important"
           defaultChecked={note?.important}
+          value="true"
         />
       </section>
       <section className="mt-8 flex items-center justify-end gap-4">

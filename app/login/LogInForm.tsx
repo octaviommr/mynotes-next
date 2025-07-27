@@ -9,7 +9,9 @@ import Button from "@/components/ui/Button"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
 export default function LogInForm(
-  props: Readonly<{ "aria-labelledby": string }>,
+  props: Readonly<{
+    "aria-labelledby": string
+  }>,
 ) {
   const searchParams = useSearchParams()
 
@@ -57,8 +59,8 @@ export default function LogInForm(
           Therefore, we won't mark the field as required.
         */}
       </section>
-      <section className="mt-8">
-        <Button type="submit" disabled={isPending} fullWidth>
+      <section className="mt-6">
+        <Button type="submit" className="w-full" disabled={isPending}>
           Log In
         </Button>
       </section>

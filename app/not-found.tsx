@@ -3,9 +3,10 @@ import Link from "@/components/ui/Link"
 
 export default function NotFound() {
   return (
-    <ErrorPage>
-      <p>Page not found.</p>
-      <Link href="/">Go to Homepage</Link>
-    </ErrorPage>
+    <ErrorPage
+      title="Ooops..."
+      message="Page not found."
+      action={<Link href="/">Go to Homepage</Link>}
+    />
   )
 }

@@ -1,5 +1,11 @@
 import { useEffect, useRef } from "react"
-import { Field, Input, type InputProps, Button } from "@headlessui/react"
+import {
+  Field,
+  Input,
+  Button,
+  type FieldProps,
+  type InputProps,
+} from "@headlessui/react"
 import clsx from "clsx"
 import type { Icon } from "@/types/Icon"
 import Label from "./Label"
@@ -13,19 +19,24 @@ type InputAdornment = Readonly<{
 type InputFieldProps = Omit<
   InputProps,
   | "className"
+  | "name"
+  | "value"
   | "onChange"
   | "invalid"
   | "aria-invalid"
   | "aria-required"
   | "aria-errormessage"
 > &
+  Pick<FieldProps, "className"> &
   Readonly<{
+    name: string
     label: string
     error?: string
     adornment?: InputAdornment
   }>
 
 export default function InputField({
+  className,
   name,
   disabled,
   required,
@@ -38,7 +49,7 @@ export default function InputField({
   const inputRef = useRef<HTMLInputElement>(null)
   const valueRef = useRef<string>()
 
-  const onChange: InputProps["onChange"] = (event) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     valueRef.current = event.target.value
   }
 
@@ -57,7 +68,7 @@ export default function InputField({
   const errorMessageId = `${name}-error-message`
 
   return (
-    <Field className="group" disabled={disabled}>
+    <Field className={clsx("group", className)} disabled={disabled}>
       <Label label={label} required={required} />
       <div className="relative mt-1">
         <Input

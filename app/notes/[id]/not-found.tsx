@@ -3,9 +3,10 @@ import Link from "@/components/ui/Link"
 
 export default function NotFoundNote() {
   return (
-    <ErrorPage>
-      <p>Note not found.</p>
-      <Link href="/notes">Go to Note Board</Link>
-    </ErrorPage>
+    <ErrorPage
+      title="Ooops..."
+      message="Note not found."
+      action={<Link href="/notes">Go to Note Board</Link>}
+    />
   )
 }

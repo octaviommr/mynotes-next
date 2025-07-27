@@ -1,23 +1,35 @@
 import { useEffect, useRef } from "react"
-import { Textarea, Field, type TextareaProps } from "@headlessui/react"
+import {
+  Textarea,
+  Field,
+  type TextareaProps,
+  type FieldProps,
+} from "@headlessui/react"
+import clsx from "clsx"
 import Label from "./Label"
 import ErrorMessage from "./ErrorMessage"
 
 type TextareaFieldProps = Omit<
   TextareaProps,
   | "className"
+  | "name"
+  | "value"
   | "onChange"
   | "invalid"
-  | "aria-invalid"
   | "aria-required"
+  | "aria-invalid"
+  | "aria-disabled"
   | "aria-errormessage"
 > &
+  Pick<FieldProps, "className"> &
   Readonly<{
+    name: string
     label: string
     error?: string
   }>
 
 export default function TextareaField({
+  className,
   name,
   disabled,
   required,
@@ -29,7 +41,7 @@ export default function TextareaField({
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const valueRef = useRef<string>()
 
-  const onChange: TextareaProps["onChange"] = (event) => {
+  const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     valueRef.current = event.target.value
   }
 
@@ -48,7 +60,7 @@ export default function TextareaField({
   const errorMessageId = `${name}-error-message`
 
   return (
-    <Field className="group" disabled={disabled}>
+    <Field className={clsx("group", className)} disabled={disabled}>
       <Label label={label} required={required} />
       <Textarea
         ref={textareaRef}

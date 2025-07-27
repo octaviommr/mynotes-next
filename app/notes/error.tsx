@@ -17,16 +17,19 @@ export default function Error({
   }, [error])
 
   return (
-    <ErrorPage>
-      <p>Something went wrong.</p>
-      <Button
-        onClick={
-          // attempt to recover by trying to re-render the route segment where the error ocurred
-          () => reset()
-        }
-      >
-        Try Again
-      </Button>
-    </ErrorPage>
+    <ErrorPage
+      title="Oh no..."
+      message="Something went wrong."
+      action={
+        <Button
+          onClick={
+            // attempt to recover by trying to re-render the route segment where the error ocurred
+            () => reset()
+          }
+        >
+          Try Again
+        </Button>
+      }
+    />
   )
 }

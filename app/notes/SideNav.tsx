@@ -6,13 +6,11 @@ import { HomeIcon, PlusIcon } from "@heroicons/react/24/outline"
 import clsx from "clsx"
 import { Icon } from "@/types/Icon"
 
-interface SideNavLinkProps {
-  href: string
-  icon: Icon
-  label: string
-}
-
-function SideNavLink({ href, icon: Icon, label }: Readonly<SideNavLinkProps>) {
+function SideNavLink({
+  href,
+  icon: Icon,
+  label,
+}: Readonly<{ href: string; icon: Icon; label: string }>) {
   const currentPath = usePathname()
 
   return (
@@ -32,10 +30,16 @@ function SideNavLink({ href, icon: Icon, label }: Readonly<SideNavLinkProps>) {
 }
 
 export default function SideNav() {
+  const sideNavLinks = [
+    { href: "/notes", icon: HomeIcon, label: "Note Board" },
+    { href: "/notes/create", icon: PlusIcon, label: "Add Note" },
+  ]
+
   return (
     <nav className="flex h-full gap-2 border-b border-solid border-[var(--border)] px-3 py-4 md:flex-col md:border-b-0 md:border-r md:px-2">
-      <SideNavLink href="/notes" icon={HomeIcon} label="Note Board" />
-      <SideNavLink href="/notes/create" icon={PlusIcon} label="Add Note" />
+      {sideNavLinks.map(({ href, icon, label }) => (
+        <SideNavLink key={href} href={href} icon={icon} label={label} />
+      ))}
     </nav>
   )
 }

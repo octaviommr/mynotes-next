@@ -6,7 +6,7 @@ export default function Label({
 }: Readonly<{ label: string; required?: boolean }>) {
   return (
     <HeadlessLabel className="text-sm/6 font-medium data-[disabled]:opacity-50">
-      {`${label}${required ? " (required)" : ""}`}
+      {required ? `${label} (required)` : label}
     </HeadlessLabel>
   )
 }

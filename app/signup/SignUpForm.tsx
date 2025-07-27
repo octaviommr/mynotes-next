@@ -8,7 +8,9 @@ import Button from "@/components/ui/Button"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 
 export default function SignUpForm(
-  props: Readonly<{ "aria-labelledby": string }>,
+  props: Readonly<{
+    "aria-labelledby": string
+  }>,
 ) {
   const [actionState, formAction, isPending] = useActionState<
     SignUpActionState,
@@ -60,7 +62,7 @@ export default function SignUpForm(
         />
       </section>
       <section className="mt-8">
-        <Button type="submit" disabled={isPending} fullWidth>
+        <Button type="submit" className="w-full" disabled={isPending}>
           Sign Up
         </Button>
       </section>
