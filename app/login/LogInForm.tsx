@@ -46,7 +46,7 @@ export default function LogInForm(
         />
         {/* 
           NOTE: No need to mark this field as required, since it's already obvious for users that the email field is
-          required when logging in
+          required when logging in.
         */}
 
         <PasswordField

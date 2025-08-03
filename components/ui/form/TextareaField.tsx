@@ -1,17 +1,11 @@
 import { useEffect, useRef } from "react"
-import {
-  Textarea,
-  Field,
-  type TextareaProps,
-  type FieldProps,
-} from "@headlessui/react"
+import { Textarea, Field, type TextareaProps } from "@headlessui/react"
 import clsx from "clsx"
 import Label from "./Label"
 import ErrorMessage from "./ErrorMessage"
 
 type TextareaFieldProps = Omit<
   TextareaProps,
-  | "className"
   | "name"
   | "value"
   | "onChange"
@@ -20,8 +14,9 @@ type TextareaFieldProps = Omit<
   | "aria-invalid"
   | "aria-disabled"
   | "aria-errormessage"
+  | "as"
+  | "children"
 > &
-  Pick<FieldProps, "className"> &
   Readonly<{
     name: string
     label: string
@@ -60,12 +55,15 @@ export default function TextareaField({
   const errorMessageId = `${name}-error-message`
 
   return (
-    <Field className={clsx("group", className)} disabled={disabled}>
+    <Field className="group" disabled={disabled}>
       <Label label={label} required={required} />
       <Textarea
         ref={textareaRef}
         name={name}
-        className="mt-1 block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]"
+        className={clsx(
+          "mt-1 block w-full resize-none rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]",
+          className,
+        )}
         onChange={onChange}
         invalid={!!error}
         aria-required={required}

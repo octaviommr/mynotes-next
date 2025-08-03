@@ -1,11 +1,5 @@
 import { useEffect, useRef } from "react"
-import {
-  Field,
-  Input,
-  Button,
-  type FieldProps,
-  type InputProps,
-} from "@headlessui/react"
+import { Field, Input, Button, type InputProps } from "@headlessui/react"
 import clsx from "clsx"
 import type { Icon } from "@/types/Icon"
 import Label from "./Label"
@@ -18,16 +12,17 @@ type InputAdornment = Readonly<{
 
 type InputFieldProps = Omit<
   InputProps,
-  | "className"
   | "name"
   | "value"
   | "onChange"
   | "invalid"
-  | "aria-invalid"
   | "aria-required"
+  | "aria-invalid"
+  | "aria-disabled"
   | "aria-errormessage"
+  | "as"
+  | "children"
 > &
-  Pick<FieldProps, "className"> &
   Readonly<{
     name: string
     label: string
@@ -68,7 +63,7 @@ export default function InputField({
   const errorMessageId = `${name}-error-message`
 
   return (
-    <Field className={clsx("group", className)} disabled={disabled}>
+    <Field className="group" disabled={disabled}>
       <Label label={label} required={required} />
       <div className="relative mt-1">
         <Input
@@ -76,6 +71,7 @@ export default function InputField({
           className={clsx(
             "block w-full rounded-lg border border-solid border-[var(--border)] bg-[var(--main-background)] px-3 py-1.5 text-sm/6 data-[invalid]:border-red-500 data-[disabled]:border-opacity-50 data-[disabled]:bg-[var(--secondary-background)]",
             { "pr-10": !!adornment },
+            className,
           )}
           name={name}
           invalid={!!error}

@@ -5,9 +5,15 @@ import {
 } from "@headlessui/react"
 import clsx from "clsx"
 
-type ButtonProps = HeadlessButtonProps &
+type ButtonVariant = "primary" | "secondary"
+
+type ButtonProps = Omit<
+  HeadlessButtonProps,
+  "aria-disabled" | "as" | "children"
+> &
   Readonly<{
-    variant?: "primary" | "secondary"
+    children?: React.ReactNode
+    variant?: ButtonVariant
   }>
 
 export default forwardRef<
