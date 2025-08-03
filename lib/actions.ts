@@ -258,8 +258,8 @@ export async function logIn(
   try {
     await dbConnect()
 
-    // validate input against the relevant paths of the schema
-    await UserModel.validate({ email, password }, ["email", "password"])
+    // validate email against the schema
+    await UserModel.validate({ email }, ["email"])
 
     /* 
       Sign in using Auth.js.

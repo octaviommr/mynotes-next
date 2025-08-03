@@ -22,6 +22,10 @@ export const { auth, signIn, signOut } = NextAuth({
       async authorize(credentials) {
         const { email, password } = credentials
 
+        if (!email || !password) {
+          return null
+        }
+
         const user = await UserModel.findOne({ email })
 
         if (!user) {
