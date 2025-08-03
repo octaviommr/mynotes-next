@@ -11,7 +11,7 @@ Below is a breakdown of the most relevant application features:
 - TypeScript code for static type checking
 - Context API and reducers for state management
 - Tailwind CSS for styling (with Headless UI and Heroicons)
-- Accessibility by using semantic HTML, ARIA roles and attributes, and by ensuring color contrast
+- Accessibility features, including the use of semantic HTML, ARIA roles and attributes, and sufficient color contrast for readability
 - Streaming using "loading.tsx" files leveraging React Suspense
 - Graceful error handling
 - Metadata templates
@@ -26,17 +26,17 @@ Below is a breakdown of the most relevant application features:
 
 This is a personal project so I'm not accepting contributions at the moment.
 
-## Running locally
+## Running Locally
 
 ### Prerequisites
 
 Building and running the application locally requires Node.js 20+ and either MongoDB Community Edition 6+ or a MongoDB Atlas account.
 
-### Install dependencies
+### Install Dependencies
 
 Run `npm install` to install all the needed packages for the project.
 
-### Environment variables
+### Environment Variables
 
 Create a ".env.local" file containing the following key and value representing the address of the MongoDB instance:
 
@@ -46,14 +46,18 @@ Typically, a local MongoDB instance address looks like `mongodb://127.0.0.1:2701
 
 Run `npx auth secret` to generate a secret key that will be used to encrypt next-auth cookies. This will also add it to the ".env.local" file.
 
-### Build and start
+### Build and Start
 
 Run `npm run dev` to build the application and start the development server. The application can be accessed via http://localhost:3000.
 
 ## Next Steps
 
 - Add tests using Playwright (with Playwright-BDD)
-- Build a Tailwind CSS theme
-- Implement containerization using Docker
+- Create a Tailwind CSS theme
 - Deploy the application
-- Automate deployment using GitHub actions
+- Implement CI/CD to automate deployment with GitHub Actions
+- Implement containerization with Docker
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
