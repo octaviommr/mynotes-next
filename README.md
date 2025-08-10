@@ -1,8 +1,8 @@
 # MyNotes (Next.js version)
 
-A very simple full-stack note board application, written for sandboxing and demonstration purposes.
+A very simple full-stack note board application, written for sandboxing, learning, and demonstration purposes.
 
-It showcases the Next.js framework, specially the frontend features, since frontend development is my main area of interest and one I'm passionate about.
+It showcases the Next.js framework, especially the frontend features, since frontend development is my main area of interest and one I'm passionate about.
 
 Below is a breakdown of the most relevant application features:
 
@@ -25,6 +25,7 @@ Below is a breakdown of the most relevant application features:
 - Graceful error handling
 
 This is a personal project so I'm not accepting contributions at the moment.
+This project is not intended as production-ready software.
 
 ## Running Locally
 
@@ -38,17 +39,15 @@ Run `npm install` to install all the needed packages for the project.
 
 ### Environment Variables
 
-Create a ".env.local" file containing the following key and value representing the address of the MongoDB instance:
+Copy `.env.example` to `.env.local` and fill in the required values.
 
-`MONGODB_URI=your-mongodb-instance-address-goes-here`
+If you're using MongoDB Atlas, use the connection string that is provided for your instance as the value for `MONGODB_URI`.
 
-Typically, a local MongoDB instance address looks like `mongodb://127.0.0.1:27017/your-database-name-goes-here`. If you're using MongoDB Atlas, use the connection string that is provided for your instance.
+Run `npx auth secret` to generate a secret key for `AUTH_SECRET`, which will be used to encrypt next-auth cookies.
 
-Run `npx auth secret` to generate a secret key that will be used to encrypt next-auth cookies. This will also add it to the ".env.local" file.
+### Start
 
-### Build and Start
-
-Run `npm run dev` to build the application and start the development server. The application can be accessed via http://localhost:3000.
+Run `npm run dev` to start the development server. The application can be accessed via http://localhost:3000.
 
 ## Next Steps
 
