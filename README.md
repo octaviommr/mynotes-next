@@ -31,7 +31,7 @@ This project is not intended as production-ready software.
 
 ### Prerequisites
 
-Building and running the application locally requires Node.js 20+ and either MongoDB Community Edition 6+ or a MongoDB Atlas account.
+Running the application locally requires Node.js 20+ and either MongoDB Community Edition 6+ or a MongoDB Atlas account.
 
 ### Install Dependencies
 
