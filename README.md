@@ -12,7 +12,7 @@ Below is a breakdown of the most relevant application features:
 - Context API and reducers for state management
 - Tailwind CSS for styling (with Headless UI and Heroicons)
 - Accessibility features, including the use of semantic HTML, ARIA roles and attributes, and sufficient color contrast for readability
-- Streaming using "loading.tsx" files leveraging React Suspense
+- Streaming using `loading.tsx` files leveraging React Suspense
 - Graceful error handling
 - Metadata templates
 
