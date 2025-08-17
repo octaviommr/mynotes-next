@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { getNotes } from "@/lib/data"
+import { getNotes } from "@/app/notes/lib/data"
 import Link from "@/components/ui/Link"
 import NoteBoardItem from "./NoteBoardItem"
 

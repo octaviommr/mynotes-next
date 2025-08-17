@@ -2,13 +2,13 @@
 
 import { Button } from "@headlessui/react"
 import { TrashIcon } from "@heroicons/react/20/solid"
-import {
-  deleteNote as runDeleteNoteAction,
-  revalidateNotes,
-} from "@/lib/actions"
 import type { Note } from "@/models/Note"
 import { useMessageDispatch } from "@/contexts/message/MessageContext"
 import { useModalControl } from "@/contexts/modal/ModalContext"
+import {
+  deleteNote as runDeleteNoteAction,
+  revalidateNotes,
+} from "./lib/actions"
 
 export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
   const dispatchMessage = useMessageDispatch()
@@ -51,25 +51,15 @@ export default function DeleteButton({ note }: Readonly<{ note: Note }>) {
     })
 
     /* 
-      Call a server action to revalidate the path for the note board page. This will trigger a new server request and
-      update the page, reflecting the deleted note.
+      Call a server action to revalidate the path for the note board page.
+      
+      This will trigger a new server request and update the page, reflecting the deleted note.
     */
     revalidateNotes()
   }
 
   return (
-    <Button
-      aria-label="Delete"
-      onClick={(event) => {
-        /*
-          Make sure we prevent the default action of this click event, which would be navigating to the note detail
-          page (since this button is within the "a" element)
-        */
-        event.preventDefault()
-
-        deleteNote()
-      }}
-    >
+    <Button aria-label="Delete" onClick={() => deleteNote()}>
       <TrashIcon className="size-5 fill-red-500" />
     </Button>
   )

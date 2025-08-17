@@ -1,9 +1,9 @@
 import NoteModel, { type Note, makeNote } from "@/models/Note"
-import dbConnect from "./dbConnect"
-import { auth } from "./auth"
+import dbConnect from "@/lib/dbConnect"
+import { auth } from "@/lib/auth"
 
-// data fetching methods called inside server components
-export const getNotes = async (): Promise<Note[]> => {
+// set up data fetching functions to be called inside server components
+export async function getNotes(): Promise<Note[]> {
   const session = await auth()
 
   await dbConnect()
@@ -13,7 +13,7 @@ export const getNotes = async (): Promise<Note[]> => {
   return notes.map(makeNote)
 }
 
-export const getNote = async (id: string): Promise<Note | null> => {
+export async function getNote(id: string): Promise<Note | null> {
   const session = await auth()
 
   await dbConnect()

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getNote } from "@/lib/data"
+import { getNote } from "@/app/notes/lib/data"
 import PageTitle from "@/components/ui/pages/PageTitle"
 import NoteForm from "../components/NoteForm"
 

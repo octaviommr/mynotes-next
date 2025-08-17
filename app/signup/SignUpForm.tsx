@@ -1,7 +1,7 @@
 "use client"
 
 import { useActionState, useEffect } from "react"
-import { type SignUpActionState, signUp } from "@/lib/actions"
+import { type SignUpActionState, signUp } from "./actions"
 import TextField from "@/components/ui/form/TextField"
 import PasswordField from "@/components/ui/form/PasswordField"
 import Button from "@/components/ui/Button"

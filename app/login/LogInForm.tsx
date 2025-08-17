@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 import { useActionState, useEffect } from "react"
-import { type LogInActionState, logIn } from "@/lib/actions"
+import { type LogInActionState, logIn } from "./actions"
 import TextField from "@/components/ui/form/TextField"
 import PasswordField from "@/components/ui/form/PasswordField"
 import Button from "@/components/ui/Button"
