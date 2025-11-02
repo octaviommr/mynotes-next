@@ -41,7 +41,7 @@ Run `npm install` to install all the needed packages for the project.
 
 Copy `.env.example` to `.env.local` and fill in the required values.
 
-If you're using MongoDB Atlas, use the connection string that is provided for your instance as the value for `MONGODB_URI`.
+If you're using MongoDB Atlas, use the connection string that is provided for your cluster as the value for `MONGODB_URI`.
 
 Run `npx auth secret` to generate a secret key for `AUTH_SECRET`, which will be used to encrypt next-auth cookies.
 
